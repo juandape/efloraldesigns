@@ -56,7 +56,7 @@ const config: Config = {
         },
       },
       animation: {
-        fadeIn: 'fadeIn 2s ease-out',
+        fadeIn: 'fadeIn 1s ease-out',
         slideUp: 'slideUp 1.5s ease-out',
         'slide-in': 'slideIn 1.5s ease-out forwards',
         'slide-left': 'slideLeft 1.5s ease-out forwards',

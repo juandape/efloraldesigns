@@ -1,3 +1,4 @@
+import { tabsStyles } from '@/styles/Styles';
 import React, { useState, useRef, useEffect } from 'react';
 
 const Ocassions: React.FC = () => {
@@ -27,7 +28,7 @@ const Ocassions: React.FC = () => {
       <div>
         <button
           type='button'
-          className='inline-flex justify-center items-center w-full px-4 py-2 font-medium text-gray-700 hover:text-blue-sky'
+          className={`inline-flex justify-center items-center w-full px-4 py-2 ${tabsStyles}`}
           onClick={toggleDropdown}
         >
           Occasions
@@ -48,7 +49,7 @@ const Ocassions: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-ocre ring-1 ring-black ring-opacity-5 transition duration-300'>
+        <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-red-200 ring-1 ring-black ring-opacity-5 animate-fadeIn'>
           <ul
             className='py-1'
             role='menu'
