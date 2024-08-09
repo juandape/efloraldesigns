@@ -6,6 +6,16 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  purge: {
+    content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    options: {
+      safelist: [
+        'hover:text-blue-sky',
+        'hover:bg-gray-100',
+        'hover:border-blue-sky',
+      ],
+    },
+  },
   theme: {
     extend: {
       colors: {

@@ -6,7 +6,7 @@ export default function Footer() {
         <strong> E Floral Designs </strong>- Miami, Flo
         <a className='text-blue-sky'></a>
       </p>
-      <p>Powered by <a href='https://juandape.dev' target="blank"><span className="italic hover:text-ocre">JuandapeDev</span></a></p>
+      <p>Powered by <a href='https://juandape.dev' target="blank"><span className="italic hover:text-ocre">Juandape.dev</span></a></p>
     </footer>
   );
 }
