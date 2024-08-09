@@ -132,7 +132,7 @@ const Carousel: React.FC<CarouselProps> = ({ items, title, elementId, visibleCla
             <img
               src={item.image}
               alt={item.name}
-              className='w-80 h-80 object-cover shadow-lg mx-auto'
+              className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl'
             />
             <p className='mt-5 text-lg text-purple'>{item.name}</p>
           </div>

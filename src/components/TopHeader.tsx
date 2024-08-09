@@ -17,11 +17,11 @@ export default function TopHeader({
     <section className="relative">
       <img
         src={imageSrc}
-        className="w-full h-auto sm:h-[500px] object-cover shadow"
+        className="w-full h-auto sm:h-[500px] object-cover shadow-sm"
         alt={imageAlt}
       />
-      <div className="flex mx-auto justify-center">
-        <h2 className="text-pink text-2xl xl:text-5xl font-semibold mb-4 border-2 border-purple w-80 xl:w-2/5 text-center rounded-xl py-4 bg-white -mt-8 sm:-mt-12 shadow-xl">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h2 className="text-2xl xl:text-5xl font-semibold mb-4  w-80 xl:w-2/5 text-center rounded-xl py-6 bg-gray-200 opacity-80 -mt-8 sm:-mt-12 shadow-sm shadow-gray-400">
           {title}
         </h2>
       </div>

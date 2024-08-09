@@ -1,4 +1,4 @@
-import { tabsStyles } from '@/styles/Styles';
+import { tabsStyles, liClasses } from '@/styles/Styles';
 import React, { useState, useRef, useEffect } from 'react';
 
 const Ocassions: React.FC = () => {
@@ -20,8 +20,7 @@ const Ocassions: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const liClasses =
-    'px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer transition duration-300';
+
 
   return (
     <div className='relative inline-block text-left z-50' ref={ref}>
@@ -49,7 +48,7 @@ const Ocassions: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-red-200 ring-1 ring-black ring-opacity-5 animate-fadeIn'>
+        <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-pink ring-1 ring-black ring-opacity-5 animate-fadeIn'>
           <ul
             className='py-1'
             role='menu'
