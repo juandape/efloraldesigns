@@ -1,5 +1,5 @@
 import TopHeader from '@/components/TopHeader';
-import about from '@/images/about.webp';
+import about from '@/images/about.jpg';
 
 export default function About() {
   return (

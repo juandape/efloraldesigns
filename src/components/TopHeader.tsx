@@ -17,11 +17,11 @@ export default function TopHeader({
     <section className="relative">
       <img
         src={imageSrc}
-        className="w-full h-auto sm:h-[500px] object-cover shadow-sm"
+        className="w-full h-40 sm:h-[500px] object-cover shadow-sm"
         alt={imageAlt}
       />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <h2 className="text-2xl xl:text-5xl font-semibold mb-4  w-80 xl:w-2/5 text-center rounded-xl py-6 bg-gray-200 opacity-80 -mt-8 sm:-mt-12 shadow-sm shadow-gray-400 animate-fadeIn">
+      <div className="sm:absolute sm:inset-0 flex items-center justify-center">
+        <h2 className="text-2xl xl:text-5xl -mt-8 font-semibold w-80 xl:w-2/5 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn">
           {title}
         </h2>
       </div>

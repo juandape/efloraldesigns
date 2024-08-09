@@ -1,5 +1,5 @@
 import TopHeader from '../../components/TopHeader';
-import contact from '../../images/contact.webp';
+import contact from '../../images/contact.jpg';
 
 export default function Contact() {
   return (
