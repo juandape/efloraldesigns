@@ -1,23 +1,27 @@
 import React from 'react';
 import Carousel from './Carousel';
 import logo from '@/images/logo.png';
+import flor9 from '@/images/flores/flor9.webp';
+import flor10 from '@/images/flores/flor10.jpg';
+import flor11 from '@/images/flores/flor11.webp';
+import flor12 from '@/images/flores/flor12.webp';
 
 const flowersItems = [
   {
-    name: 'flower 1',
-    image: logo.src,
+    name: 'Rouses',
+    image: flor9.src,
   },
   {
-    name: 'flower 2',
-    image: logo.src,
+    name: 'Bouquet',
+    image: flor10.src,
   },
   {
-    name: 'flower 3',
-    image: logo.src,
+    name: 'White flowers',
+    image: flor11.src,
   },
   {
-    name: 'flower 4',
-    image: logo.src,
+    name: 'Sunflowers',
+    image: flor12.src,
   },
   // Add more items as needed
 ];

@@ -19,7 +19,7 @@ export default function Contact() {
             type='text'
             id='name'
             name='name'
-            className='bg-gray-100 py-2 rounded-lg mb-5 pl-3'
+            className='bg-gray-100 py-3 rounded-lg mb-5 pl-3'
             placeholder='Jhon Doe'
           />
           <label htmlFor='email' className='ml-5 mb-2 text-blue-sky font-bold'>
@@ -29,7 +29,7 @@ export default function Contact() {
             type='email'
             id='email'
             name='email'
-            className='bg-gray-100 py-2 rounded-lg mb-5 pl-3'
+            className='bg-gray-100 py-3 rounded-lg mb-5 pl-3'
             placeholder='name@mail.com'
           />
           <label
@@ -41,7 +41,7 @@ export default function Contact() {
           <textarea
             id='message'
             name='message'
-            className='bg-gray-100 py-2 rounded-lg mb-5 resize-none h-40 pl-3'
+            className='bg-gray-100 py-3 rounded-lg mb-5 resize-none h-40 pl-3'
             placeholder='Describe your thoughts'
           />
           <button

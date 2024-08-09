@@ -1,4 +1,4 @@
-import { tabsStyles, liClasses } from '@/styles/Styles';
+import { tabsStyles, liStyles } from '@/styles/Styles';
 import React, { useState, useRef, useEffect } from 'react';
 
 const Ocassions: React.FC = () => {
@@ -27,7 +27,7 @@ const Ocassions: React.FC = () => {
       <div>
         <button
           type='button'
-          className={`inline-flex justify-center items-center w-full px-4 py-2 ${tabsStyles}`}
+          className={`inline-flex sm:justify-center items-center w-full py-2 ${tabsStyles}`}
           onClick={toggleDropdown}
         >
           Occasions
@@ -48,29 +48,29 @@ const Ocassions: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-pink ring-1 ring-black ring-opacity-5 animate-fadeIn'>
+        <div className='origin-top-right absolute pl-6 mt-2 py-4 w-56 rounded-md shadow-lg bg-pink ring-1 ring-black ring-opacity-5 animate-fadeIn'>
           <ul
             className='py-1'
             role='menu'
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Birthday
             </li>
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Wedding
             </li>
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Anniversary
             </li>
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Graduation
             </li>
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Valentine's Day
             </li>
-            <li className={liClasses} role='menuitem'>
+            <li className={liStyles} role='menuitem'>
               Christmas
             </li>
           </ul>

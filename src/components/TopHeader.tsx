@@ -21,7 +21,7 @@ export default function TopHeader({
         alt={imageAlt}
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <h2 className="text-2xl xl:text-5xl font-semibold mb-4  w-80 xl:w-2/5 text-center rounded-xl py-6 bg-gray-200 opacity-80 -mt-8 sm:-mt-12 shadow-sm shadow-gray-400">
+        <h2 className="text-2xl xl:text-5xl font-semibold mb-4  w-80 xl:w-2/5 text-center rounded-xl py-6 bg-gray-200 opacity-80 -mt-8 sm:-mt-12 shadow-sm shadow-gray-400 animate-fadeIn">
           {title}
         </h2>
       </div>
