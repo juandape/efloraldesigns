@@ -73,7 +73,10 @@ export default function Login({ toggleModal }: { toggleModal: () => void }) {
       </form>
       <p className='text-sm mt-10 text-right'>
         Don't have an account?{' '}
-        <Link href='/signup' className='text-blue-sky hover:text-blue-500 transition duration-300'>
+        <Link
+          href='/signup'
+          className='text-blue-sky hover:text-blue-500 transition duration-300'
+        >
           Sign up
         </Link>
       </p>
