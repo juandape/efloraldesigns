@@ -5,25 +5,22 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './public/index.html',
   ],
-  purge: {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-    options: {
-      safelist: [
-        'hover:text-blue-sky',
-        'hover:bg-gray-100',
-        'hover:border-blue-sky',
-      ],
-    },
-  },
+  safelist: [
+    'hover:text-blue-sky',
+    'hover:bg-gray-100',
+    'hover:border-blue-sky',
+  ],
   theme: {
     extend: {
       colors: {
-        'pink': '#ECD7CA',
-        'purple': '#B82EB7',
+        pink: '#ECD7CA',
+        purple: '#B82EB7',
         'blue-sky': '#01AFD2',
         'green-light': '#89E2A4',
-        'ocre': '#F6DC99',
+        ocre: '#F6DC99',
       },
       keyframes: {
         fadeIn: {

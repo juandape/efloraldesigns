@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const initialFormState = {
-  username: '',
+  email: '',
   password: '',
 };
 
@@ -19,7 +19,7 @@ export default function Login({ toggleModal }: { toggleModal: () => void }) {
     event.preventDefault();
     setData(initialFormState);
     Swal.fire({
-      title: `Welcome Back ${data.username}!`,
+      title: `Welcome Back ${data.email}!`,
       text: 'You have successfully signed in!',
       icon: 'success',
       confirmButtonText: 'OK',
@@ -43,16 +43,16 @@ export default function Login({ toggleModal }: { toggleModal: () => void }) {
       </h2>
       <hr className='border-blue-sky' />
       <form className='flex flex-col my-5' onSubmit={handleSubmit}>
-        <label htmlFor='username' className={labelStyles}>
-          User
+        <label htmlFor='email' className={labelStyles}>
+          Email
         </label>
         <input
-          type='text'
-          id='username'
-          name='username'
+          type='email'
+          id='email'
+          name='email'
           className={inputStyles}
-          placeholder='Username'
-          value={data.username}
+          placeholder='email'
+          value={data.email}
           onChange={handleChange}
         />
         <label htmlFor='password' className={labelStyles}>
