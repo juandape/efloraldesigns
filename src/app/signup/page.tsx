@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { buttonStyles, labelStyles, inputStyles } from '@/styles/Styles';
 import Swal from 'sweetalert2';
 import { FaRegEye, FaEyeSlash } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/users`;
