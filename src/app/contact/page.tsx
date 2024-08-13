@@ -4,6 +4,11 @@ import { useState } from 'react';
 import TopHeader from '../../components/TopHeader';
 import contact from '../../images/contact.jpg';
 import { buttonStyles, labelStyles, inputStyles } from '@/styles/Styles';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const url = `${BASE_URL}/api/contact`;
 
 const initialFormState = {
   name: '',
@@ -17,11 +22,30 @@ export default function Contact() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(data);
+    axios
+      .post(url, data)
+      .then(() => {
+        Swal.fire({
+          title: 'Thank you for contacting us!',
+          text: 'We will get back to you as soon as possible.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Oops!',
+          text: 'Something went wrong. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
     setData(initialFormState);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
     setData((prevData) => ({
       ...prevData,
