@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const initialFormState = {
   username: '',
@@ -70,6 +71,12 @@ export default function Login({ toggleModal }: { toggleModal: () => void }) {
           Sign In
         </button>
       </form>
+      <p className='text-sm mt-10 text-right'>
+        Don't have an account?{' '}
+        <Link href='/signup' className='text-blue-sky hover:text-blue-500 transition duration-300'>
+          Sign up
+        </Link>
+      </p>
     </section>
   );
 }
