@@ -16,14 +16,14 @@ export default function VerifyAccount() {
   const [activationStatus, setActivationStatus] = useState('');
 
   async function handleClick() {
-    setLoading(true);
     try {
       await axios.post(`${url}/activate/${token}`).then((res) => {
         setActivationStatus(
           res.data.message || 'Account activated successfully'
         );
-        Cookies.set('token', res.data.jwt, { expires: 7 }); // Set cookie for 7 days
-        Cookies.set('user', JSON.stringify(res.data.user), { expires: 7 }); // Set cookie for 7 days
+        console.log(res.data);
+        Cookies.set('token', res.data.jwtToken, { expires: 7 });
+        Cookies.set('user', JSON.stringify(res.data.profile), { expires: 7 });
         Swal.fire({
           icon: 'success',
           title: 'Account Activated',

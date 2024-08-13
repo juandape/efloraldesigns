@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { buttonStyles, labelStyles, inputStyles } from '@/styles/Styles';
 import Swal from 'sweetalert2';
 import { FaRegEye, FaEyeSlash } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/users`;
@@ -22,6 +23,7 @@ export default function Signup() {
   const [data, setData] = useState(initialFormState);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -67,15 +69,15 @@ export default function Signup() {
 
     try {
       await axios.post(url, data).then((res) => {
-        console.log('user', res.data);
         setLoading(false);
         Swal.fire({
           icon: 'success',
-          title: 'Account created successfully',
+          title: 'Account created successfully!',
+          text: 'Please check your email to verify your account',
           showCloseButton: true,
         });
         setData(initialFormState);
-
+        router.push('/');
       });
     } catch (error) {
       console.log(error);
