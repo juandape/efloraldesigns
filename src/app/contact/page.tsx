@@ -22,6 +22,7 @@ export default function Contact() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(data);
     axios
       .post(url, data)
       .then(() => {
