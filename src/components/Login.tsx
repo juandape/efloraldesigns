@@ -2,30 +2,61 @@
 
 import { useState } from 'react';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
+import { FaRegEye, FaEyeSlash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const url = `${BASE_URL}/auth/local/login`;
+
+interface Props {
+  toggleModal: () => void;
+}
 
 const initialFormState = {
   email: '',
   password: '',
 };
 
-export default function Login({ toggleModal }: { toggleModal: () => void }) {
+export default function Login({ toggleModal }: Props) {
   const [data, setData] = useState(initialFormState);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setData(initialFormState);
-    Swal.fire({
-      title: `Welcome Back ${data.email}!`,
-      text: 'You have successfully signed in!',
-      icon: 'success',
-      confirmButtonText: 'OK',
-    });
-    toggleModal();
-    router.push('/admin-tools');
+    console.log(data, url);
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log(res.data);
+        Cookies.set('token', res.data.jwtToken, { expires: 7 });
+        Cookies.set('user', JSON.stringify(res.data.profile), { expires: 7 });
+        Swal.fire({
+          title: `Welcome Back ${res.data.profile.name}!`,
+          text: 'You have successfully signed in!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        router.push('/admin-tools');
+        toggleModal();
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          title: 'Oops...',
+          text: 'Bad credentials, please try again!',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,22 +82,38 @@ export default function Login({ toggleModal }: { toggleModal: () => void }) {
           id='email'
           name='email'
           className={inputStyles}
-          placeholder='email'
+          placeholder='Your registered email'
           value={data.email}
           onChange={handleChange}
         />
-        <label htmlFor='password' className={labelStyles}>
-          Password
-        </label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          className={inputStyles}
-          placeholder='Your Password'
-          value={data.password}
-          onChange={handleChange}
-        />
+        <div className='relative flex flex-col'>
+          <label htmlFor='password' className={labelStyles}>
+            Password
+          </label>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            id='password'
+            name='password'
+            className={inputStyles}
+            placeholder='Your Password'
+            value={data.password}
+            onChange={handleChange}
+          />
+          <span className='absolute right-5 top-12'>
+            {showPassword ? (
+              <FaRegEye
+                onClick={togglePassword}
+                className='text-blue-sky cursor-pointer'
+              />
+            ) : (
+              <FaEyeSlash
+                onClick={togglePassword}
+                className='text-blue-sky cursor-pointer'
+              />
+            )}
+          </span>
+        </div>
+
         <button type='submit' className={`mt-5 ${buttonStyles}`}>
           Sign In
         </button>
