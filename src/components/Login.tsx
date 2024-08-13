@@ -44,9 +44,21 @@ export default function Login({ toggleModal }: Props) {
           text: 'You have successfully signed in!',
           icon: 'success',
           confirmButtonText: 'OK',
+          preConfirm: () => {
+            if (res.data.profile.role === 'admin') {
+              router.push('/admin-tools');
+            } else {
+              router.push('/');
+            }
+            toggleModal();
+            return new Promise<void>((resolve) => {
+              setTimeout(() => {
+                location.reload();
+                resolve();
+              }, 0);
+            });
+          },
         });
-        router.push('/admin-tools');
-        toggleModal();
       })
       .catch((error) => {
         console.error(error);

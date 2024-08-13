@@ -1,18 +1,33 @@
 'use client';
 
-import { IoPersonCircleOutline, IoMenu, IoClose } from 'react-icons/io5';
+import {
+  IoPersonCircleOutline,
+  IoPersonCircleSharp,
+  IoMenu,
+  IoClose,
+} from 'react-icons/io5';
 import Link from 'next/link';
 import logo from '@/images/logo.png';
 import Img from 'next/image';
-import Ocassions from './components/Ocassions';
-import { useState, useEffect, useRef } from 'react';
+import Ocassions from '@/components/Ocassions';
+import { useState, useEffect, useRef, use } from 'react';
 import { tabsStyles } from '@/styles/Styles';
 import Login from '@/components/Login';
+import Cookies from 'js-cookie';
+import SigninUser from '@/components/SigninUser';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -53,9 +68,13 @@ export default function Header() {
         <Link href='/contact' className={tabsStyles}>
           Contact Us
         </Link>
-        <button onClick={toggleModal}>
-          <IoPersonCircleOutline className={`text-2xl ${tabsStyles}`} />
-        </button>
+        {isLoggedIn ? (
+          <SigninUser />
+        ) : (
+          <button onClick={toggleModal} className={tabsStyles}>
+            <IoPersonCircleOutline className='text-2xl' />
+          </button>
+        )}
       </nav>
       <div className='md:hidden flex items-center mr-5'>
         <button onClick={toggleMenu}>
@@ -86,9 +105,13 @@ export default function Header() {
           >
             Contact Us
           </Link>
-          <button onClick={toggleModal} className={`${tabsStyles} my-2`}>
-            <IoPersonCircleOutline className='text-2xl' onClick={toggleMenu} />
-          </button>
+          {isLoggedIn ? (
+            <SigninUser />
+          ) : (
+            <button onClick={toggleModal} className={`${tabsStyles} my-2`}>
+              <IoPersonCircleOutline className='text-2xl' />
+            </button>
+          )}
         </nav>
       )}
 
