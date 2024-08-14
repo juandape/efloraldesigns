@@ -6,7 +6,7 @@ export default function AdminTools() {
       <h2 className='text-2xl font-bold text-center text-blue-sky mb-2'>
         Admin Tools
       </h2>
-      <hr className='border-blue-sky' />
+      <hr className='border-blue-sky w-40 mx-auto' />
       <div className='flex flex-col my-5'>
         <Link
           href='/admin-tools/users'

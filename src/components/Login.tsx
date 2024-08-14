@@ -37,7 +37,7 @@ export default function Login({ toggleModal }: Props) {
       .post(url, data)
       .then((res) => {
         console.log(res.data);
-        Cookies.set('token', res.data.jwtToken, { expires: 7 });
+        Cookies.set('token', res.data.token, { expires: 7 });
         Cookies.set('user', JSON.stringify(res.data.profile), { expires: 7 });
         Swal.fire({
           title: `Welcome Back ${res.data.profile.name}!`,
