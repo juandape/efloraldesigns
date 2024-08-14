@@ -23,6 +23,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   onClose,
   onUpdate,
 }) => {
+  if (!user) return null;
   const [editedUser, setEditedUser] = useState({
     name: user.name,
     email: user.email,

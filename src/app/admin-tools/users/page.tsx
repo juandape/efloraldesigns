@@ -146,7 +146,7 @@ export default function Users() {
           ))}
       </div>
 
-      {showEditModal && (
+      {showEditModal && currentUser && (
         <EditUserModal
           user={currentUser}
           onClose={() => setShowEditModal(false)}
