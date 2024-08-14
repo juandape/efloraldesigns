@@ -6,20 +6,15 @@ import Cookies from 'js-cookie';
 import { tableHeaderStyles, tableRowStyles } from '@/styles/Styles';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
+import EditUserModal, { User } from '@/components/EditUserModal';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/users`;
 
-export interface User {
-  _id: number;
-  name: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-}
-
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -37,7 +32,6 @@ export default function Users() {
         const usersData = response.data.users;
         if (Array.isArray(usersData)) {
           setUsers(usersData);
-          console.log(usersData);
         } else {
           console.error('Unexpected data format:', response.data);
         }
@@ -57,6 +51,7 @@ export default function Users() {
   };
 
   const handleDelete = (userId: number) => {
+    console.log('delete', userId);
     const token = Cookies.get('token');
     if (!token) {
       return;
@@ -93,10 +88,19 @@ export default function Users() {
   };
 
   const handleEdit = (userId: number) => {
-    const token = Cookies.get('token');
-    if (!token) {
-      return;
+    const user = users.find((user) => user._id === userId);
+    if (user) {
+      setCurrentUser(user);
+      setShowEditModal(true);
     }
+  };
+
+  const handleSave = (updatedUser: User) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user._id === updatedUser._id ? updatedUser : user
+      )
+    );
   };
 
   return (
@@ -141,6 +145,14 @@ export default function Users() {
             </div>
           ))}
       </div>
+
+      {showEditModal && (
+        <EditUserModal
+          user={currentUser}
+          onClose={() => setShowEditModal(false)}
+          onUpdate={handleSave}
+        />
+      )}
     </section>
   );
 }
