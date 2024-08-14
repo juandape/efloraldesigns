@@ -7,6 +7,7 @@ import { tableHeaderStyles, tableRowStyles } from '@/styles/Styles';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import EditUserModal, { User } from '@/components/EditUserModal';
+import { MdOutlineBackspace } from 'react-icons/md';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/users`;
@@ -104,7 +105,10 @@ export default function Users() {
   };
 
   return (
-    <section className='p-6 h-screen'>
+    <section className='relative p-6 h-screen'>
+      <a href='/admin-tools' className='absolute left-96'>
+        <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
+      </a>
       <h2 className='text-2xl font-bold text-center text-blue-sky mb-2'>
         Registered Users
       </h2>
@@ -145,7 +149,6 @@ export default function Users() {
             </div>
           ))}
       </div>
-
       {showEditModal && currentUser && (
         <EditUserModal
           user={currentUser}
