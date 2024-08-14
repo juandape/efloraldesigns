@@ -16,7 +16,7 @@ const SigninUser: React.FC = () => {
   };
 
   const getUser = Cookies.get('user');
-  const userRole = getUser ? JSON.parse(getUser).role : '';
+  const userRole = getUser ? JSON.parse(getUser).role[0] : '';
 
   const handleLogout = () => {
     Swal.fire({
