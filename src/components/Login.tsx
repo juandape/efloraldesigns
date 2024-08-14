@@ -132,12 +132,17 @@ export default function Login({ toggleModal }: Props) {
       </form>
       <p className='text-sm mt-10 text-right'>
         Don't have an account?{' '}
-        <Link
-          href='/signup'
-          className='text-blue-sky hover:text-blue-500 transition duration-300'
+        <span
+          className='text-blue-sky hover:text-blue-500 cursor-pointer transition duration-300'
+          onClick={() => {
+            toggleModal();
+            setTimeout(() => {
+              router.push('/signup');
+            }, 0);
+          }}
         >
           Sign up
-        </Link>
+        </span>
       </p>
     </section>
   );
