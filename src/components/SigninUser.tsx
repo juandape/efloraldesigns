@@ -66,6 +66,7 @@ const SigninUser: React.FC = () => {
             role='menu'
             aria-orientation='vertical'
             aria-labelledby='options-menu'
+            onClick={toggleDropdown}
           >
             {userRole === 'admin' && (
               <li className={liStyles} role='menuitem'>
