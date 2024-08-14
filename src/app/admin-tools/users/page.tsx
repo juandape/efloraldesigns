@@ -3,12 +3,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { tableHeaderStyles, tableRowStyles } from '@/styles/Styles';
+import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
+import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/users`;
 
 export interface User {
-  id: number;
+  _id: number;
   name: string;
   email: string;
   phone: string;
@@ -34,6 +37,7 @@ export default function Users() {
         const usersData = response.data.users;
         if (Array.isArray(usersData)) {
           setUsers(usersData);
+          console.log(usersData);
         } else {
           console.error('Unexpected data format:', response.data);
         }
@@ -52,62 +56,88 @@ export default function Users() {
     });
   };
 
+  const handleDelete = (userId: number) => {
+    const token = Cookies.get('token');
+    if (!token) {
+      return;
+    }
+    try {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this user!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${url}/${userId}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then(() => {
+              setUsers((prevUsers) =>
+                prevUsers.filter((user) => user._id !== userId)
+              );
+              Swal.fire('Deleted!', 'The user has been deleted.', 'success');
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('Cancelled', 'The user is safe :)', 'error');
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleEdit = (userId: number) => {
+    const token = Cookies.get('token');
+    if (!token) {
+      return;
+    }
+  };
+
   return (
-    <section className='p-6 rounded-xl'>
+    <section className='p-6 h-screen'>
       <h2 className='text-2xl font-bold text-center text-blue-sky mb-2'>
-        Users
+        Registered Users
       </h2>
-      <hr className='border-blue-sky w-40 mx-auto' />
-      <div className='flex flex-col my-5'>
+      <hr className='border-blue-sky w-60 mx-auto mb-10' />
+      <div className='flex flex-col my-5 items-center'>
+        <div className='flex'>
+          <div className={tableHeaderStyles}>User</div>
+          <div className={tableHeaderStyles}>Email</div>
+          <div className={tableHeaderStyles}>Phone</div>
+          <div className={tableHeaderStyles}>Created At</div>
+          <div className='px-4 py-3 border w-28 text-sm font-medium text-gray-900 bg-gray-50'>
+            Actions
+          </div>
+        </div>
         {Array.isArray(users) &&
           users.map((user) => (
-            <div key={user.id} className=''>
-              <table className='min-w-full divide-y divide-gray-200 border border-gray-300'>
-                <thead className='bg-gray-100'>
-                  <tr>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Name
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Email
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Phone
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Created
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      Select
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
-                  {users.map((user) => (
-                    <tr key={user.id} className='hover:bg-gray-50'>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
-                        {user.name}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        <a href={`mailto:${user.email}`}>{user.email}</a>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        {user.phone}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        {formatDate(user.createdAt)}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        <input
-                          type='checkbox'
-                          name='selected'
-                          value={user.id}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div key={user._id} className='bg-white flex items-center'>
+              <div className={tableRowStyles}>{user.name}</div>
+              <a href={`mailto:${user.email}`} className={tableRowStyles}>
+                {user.email}
+              </a>
+              <div className={tableRowStyles}>{user.phone}</div>
+              <div className={tableRowStyles}>{formatDate(user.createdAt)}</div>
+              <div className='py-3 px-6 w-28 border text-left text-sm text-gray-500 flex gap-5'>
+                <span
+                  className='text-blue-sky cursor-pointer text-xl hover:text-blue-500'
+                  onClick={() => handleEdit(user._id)}
+                >
+                  <RiEdit2Line />
+                </span>
+                <span
+                  className='text-red-500 cursor-pointer text-xl hover:text-red-700'
+                  onClick={() => handleDelete(user._id)}
+                >
+                  <RiDeleteBinLine />
+                </span>
+              </div>
             </div>
           ))}
       </div>

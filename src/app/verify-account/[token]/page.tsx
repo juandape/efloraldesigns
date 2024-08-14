@@ -43,18 +43,23 @@ export default function VerifyAccount() {
   }
 
   return (
-    <div className='flex flex-col h-screen bg-pink'>
-      <h1 className='text-3xl font-bold text-center mb-10 mx-5 mt-20'>
-        Welcome to E Floral Designs Miami
-      </h1>
-      <button
-        onClick={handleClick}
-        className={`w-48 mx-auto ${buttonStyles}`}
-        disabled={loading}
-      >
-        {loading ? 'Loading...' : 'Verify Account'}
-      </button>
-      <p>{!token || activationStatus === 'Account activated'}</p>
+    <div className='flex flex-col w-full h-screen bg-pink'>
+      <div className='w-96 sm:w-1/3 bg-white py-10 rounded-xl mx-auto mt-20 shadow-xl animate-slide-right'>
+        {' '}
+        <h1 className='text-3xl font-bold text-center mb-10 mx-5 mt-10'>
+          Welcome to E Floral Designs Miami
+        </h1>
+        <div className='w-60 mx-auto'>
+          <button
+            onClick={handleClick}
+            className={buttonStyles}
+            disabled={loading}
+          >
+            {loading ? 'Loading...' : 'Verify Account'}
+          </button>
+        </div>
+        <p>{!token || activationStatus === 'Account activated'}</p>
+      </div>
     </div>
   );
 }

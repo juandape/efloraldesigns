@@ -10,3 +10,9 @@ export const buttonStyles =
 export const labelStyles = 'ml-5 mb-2 text-blue-sky font-bold';
 
 export const inputStyles = 'bg-gray-100 py-3 rounded-lg mb-5 pl-3';
+
+export const tableHeaderStyles =
+  'px-6 py-3 border w-60 text-sm font-medium text-gray-900 bg-gray-50';
+
+export const tableRowStyles =
+  'px-6 py-3 w-60 border text-left text-sm text-gray-500';
