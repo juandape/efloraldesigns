@@ -8,7 +8,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const url = `${BASE_URL}/api/contact`;
+const url = `${BASE_URL}/api/contact-messages`;
 
 const initialFormState = {
   name: '',
@@ -22,7 +22,6 @@ export default function Contact() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(data);
     axios
       .post(url, data)
       .then(() => {

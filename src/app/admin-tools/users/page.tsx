@@ -113,7 +113,7 @@ export default function Users() {
         Registered Users
       </h2>
       <hr className='border-blue-sky w-60 mx-auto mb-10' />
-      <div className='flex flex-col my-5 items-center'>
+      <div className='flex flex-col my-5 items-start sm:items-center overflow-x-auto'>
         <div className='flex'>
           <div className={tableHeaderStyles}>User</div>
           <div className={tableHeaderStyles}>Email</div>
