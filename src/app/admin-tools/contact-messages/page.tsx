@@ -100,7 +100,7 @@ export default function ContactMessages() {
   });
 
   return (
-    <section className='relative p-6 h-screen'>
+    <section className='relative p-6'>
       <a href='/admin-tools' className='absolute left-96'>
         <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
       </a>

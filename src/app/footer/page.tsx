@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className='bg-black flex flex-col sm:flex-row bottom-0 w-full h-16 inset-0 justify-center items-center sm:justify-between text-white sm:text-sm text-xs sm:px-20'>
+    <footer className='bg-black flex flex-col sm:flex-row w-full h-16 inset-0 justify-center items-center sm:justify-between text-white sm:text-sm text-xs sm:px-20'>
       <p>
         Copyright &copy; 2024
         <strong> E Floral Designs </strong>- Miami, Flo
