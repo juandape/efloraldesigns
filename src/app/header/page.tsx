@@ -2,15 +2,14 @@
 
 import {
   IoPersonCircleOutline,
-  IoPersonCircleSharp,
   IoMenu,
   IoClose,
 } from 'react-icons/io5';
 import Link from 'next/link';
 import logo from '@/images/logo.png';
 import Img from 'next/image';
-import Ocassions from '@/components/Ocassions';
-import { useState, useEffect, useRef, use } from 'react';
+import Ocassions from './components/Ocassions';
+import { useState, useEffect, useRef } from 'react';
 import { tabsStyles } from '@/styles/Styles';
 import Login from '@/components/Login';
 import Cookies from 'js-cookie';

@@ -1,4 +1,5 @@
 import { tabsStyles, liStyles } from '@/styles/Styles';
+import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
 const Ocassions: React.FC = () => {
@@ -19,8 +20,6 @@ const Ocassions: React.FC = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-
 
   return (
     <div className='relative inline-block text-left z-50' ref={ref}>
@@ -55,24 +54,21 @@ const Ocassions: React.FC = () => {
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            <li className={liStyles} role='menuitem'>
-              Birthday
-            </li>
-            <li className={liStyles} role='menuitem'>
-              Wedding
-            </li>
-            <li className={liStyles} role='menuitem'>
-              Anniversary
-            </li>
-            <li className={liStyles} role='menuitem'>
-              Graduation
-            </li>
-            <li className={liStyles} role='menuitem'>
-              Valentine's Day
-            </li>
-            <li className={liStyles} role='menuitem'>
-              Christmas
-            </li>
+            <Link href='/ocassions/anniversary'>
+              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
+                Anniversary
+              </li>
+            </Link>
+            <Link href='/ocassions/birthday'>
+              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
+                Birthday
+              </li>
+            </Link>
+            <Link href='/ocassions/weddings'>
+              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
+                Weddings
+              </li>
+            </Link>
           </ul>
         </div>
       )}

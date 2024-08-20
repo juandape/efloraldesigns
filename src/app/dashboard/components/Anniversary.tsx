@@ -1,6 +1,5 @@
 import React from 'react';
-import Carousel from './Carousel';
-import logo from '@/images/logo.png';
+import Carousel from '@/components/Carousel';
 import flor9 from '@/images/flores/flor9.webp';
 import flor10 from '@/images/flores/flor10.jpg';
 import flor11 from '@/images/flores/flor11.webp';

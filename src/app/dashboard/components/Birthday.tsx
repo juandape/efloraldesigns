@@ -1,6 +1,5 @@
 import React from 'react';
-import Carousel from './Carousel';
-import logo from '@/images/logo.png';
+import Carousel from '@/components/Carousel';
 import flor5 from '@/images/flores/flor5.jpeg';
 import flor6 from '@/images/flores/flor6.webp';
 import flor7 from '@/images/flores/flor7.jpeg';
@@ -32,7 +31,7 @@ const Birthday: React.FC = () => {
       items={flowersItems}
       title='Birthday'
       elementId='slider'
-      visibleClass='animate-slide-in'
+      visibleClass='animate-slide-right'
       hiddenClass='block'
     />
   );

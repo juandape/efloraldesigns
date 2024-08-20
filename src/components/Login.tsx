@@ -5,7 +5,6 @@ import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
 import { FaRegEye, FaEyeSlash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 

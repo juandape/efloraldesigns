@@ -16,9 +16,9 @@ export default function Dashboard() {
         title='E Floral Designs'
         headerText='Your better choice for your special occasions'
       />
+      <Anniversary />
       <Weddings />
       <Birthday />
-      <Anniversary />
     </>
   );
 }
