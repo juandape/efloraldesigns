@@ -9,7 +9,7 @@ import Anniversary from './components/Anniversary';
 export default function Dashboard() {
   const imageSrc = flores.src;
   return (
-    <>
+    <div className='mb-10'>
       <TopHeader
         imageSrc={imageSrc}
         imageAlt='banner'
@@ -19,6 +19,6 @@ export default function Dashboard() {
       <Anniversary />
       <Weddings />
       <Birthday />
-    </>
+    </div>
   );
 }
