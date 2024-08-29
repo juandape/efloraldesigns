@@ -15,16 +15,25 @@ const url = `${BASE_URL}/api/flowers`;
 const InitialForm = {
   imageName: '',
   image: [] as string[],
+  videoName: '',
+  video: [] as string[],
   ocassion: '',
 };
 
 export default function ImageHandler() {
   const [form, setForm] = useState(InitialForm);
-  const [files, setFiles] = useState([]);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [videoFiles, setVideoFiles] = useState<File[]>([]);
   const role = GetRole();
 
-  const handleUpload = (e: { target: { files: any } }) => {
-    setFiles(e.target.files);
+  const handleUpload = (e: { target: { name: string; files: FileList } }) => {
+    const { name, files } = e.target;
+
+    if (name === 'images') {
+      setImageFiles(Array.from(files));
+    } else if (name === 'video') {
+      setVideoFiles(Array.from(files));
+    }
   };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -32,18 +41,23 @@ export default function ImageHandler() {
 
     const formData = new FormData();
 
-    for (let i = 0; i < files.length; i++) {
-      formData.append('files', files[i]);
-    }
+    imageFiles.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    videoFiles.forEach((file) => {
+      formData.append('files', file);
+    });
 
     try {
       if (role !== 'admin') {
         Swal.fire({
-          title: 'You are not authorized to upload images',
+          title: 'You are not authorized to upload files',
           icon: 'error',
         });
         return;
       }
+
       const response = await axios.post(
         `${BASE_URL}/api/upload/files`,
         formData,
@@ -56,13 +70,18 @@ export default function ImageHandler() {
       );
       const result = response.data;
 
-      const imageUrl = result.map(
-        (image: { secure_url: string }) => image.secure_url
-      );
+      const imageUrls = result
+        .filter((item: any) => item.resource_type === 'image')
+        .map((image: { secure_url: string }) => image.secure_url);
+
+      const videoUrls = result
+        .filter((item: any) => item.resource_type === 'video')
+        .map((video: { secure_url: string }) => video.secure_url);
 
       const data = {
         ...form,
-        image: [...imageUrl],
+        image: imageUrls,
+        video: videoUrls,
       };
 
       await axios.post(url, data, {
@@ -73,7 +92,7 @@ export default function ImageHandler() {
       });
 
       Swal.fire({
-        title: 'Image uploaded successfully',
+        title: 'Files uploaded successfully',
         icon: 'success',
       });
       setForm(InitialForm);
@@ -94,8 +113,8 @@ export default function ImageHandler() {
     const { name, value, files } = e.target as HTMLInputElement;
     setForm({ ...form, [name]: value });
 
-    if (name === 'images' && files) {
-      handleUpload({ target: { files } });
+    if (files) {
+      handleUpload({ target: { name, files } });
     }
   };
 
@@ -112,6 +131,7 @@ export default function ImageHandler() {
           onChange={handleChange}
           accept='image/*'
           className={inputStyles}
+          multiple
         />
         <label className={labelStyles}>Name of the image</label>
         <input
@@ -121,8 +141,25 @@ export default function ImageHandler() {
           onChange={handleChange}
           className={inputStyles}
         />
+        <label className={labelStyles}>Select videos</label>
+        <input
+          type='file'
+          name='video'
+          onChange={handleChange}
+          accept='video/*'
+          className={inputStyles}
+          multiple
+        />
+        <label className={labelStyles}>Name of the video</label>
+        <input
+          type='text'
+          name='videoName'
+          value={form.videoName}
+          onChange={handleChange}
+          className={inputStyles}
+        />
         <label className={labelStyles}>Ocassion Type</label>
-        <select name='ocassion' onChange={handleChange} className={inputStyles}>
+        <select name='ocassion' onChange={handleChange} className={inputStyles} required>
           <option value='Select ocassion' hidden>
             Select ocassion
           </option>
