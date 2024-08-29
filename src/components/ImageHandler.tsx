@@ -166,6 +166,7 @@ export default function ImageHandler() {
           <option value='birthday'>Birthday</option>
           <option value='anniversary'>Anniversary</option>
           <option value='weddings'>Weddings</option>
+          <option value='homepage'>HomePage</option>
         </select>
         <button type='submit' className={buttonStyles}>
           Upload
