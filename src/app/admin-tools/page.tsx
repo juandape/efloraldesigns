@@ -5,11 +5,15 @@ export default function AdminTools() {
   return (
     <section className='p-6 h-screen bg-pink'>
       <div className='flex flex-col my-5 border w-96 sm:w-1/3 mx-auto bg-white py-10 rounded-xl shadow-xl animate-slideUp mt-20'>
-      <h2 className='text-2xl font-bold text-center text-blue-sky mb-2'>
-        Admin Tools
-      </h2>
-      <hr className='border-blue-sky w-40 mx-auto mb-10' />
-        <div className='mx-auto'>
+      <div className='flex items-center justify-center'>
+        <h2 className='text-2xl xl:text-5xl mt-5 font-semibold w-80 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn'>
+          Admin Tools
+        </h2>
+      </div>
+      <p className='text-blue-sky text-base sm:text-3xl text-center my-10 mx-5 sm:mx-20 font-semibold'>
+        Manage your website
+      </p>
+        <div className='mx-auto text-xl'>
           <Link
             href='/admin-tools/users'
             className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
