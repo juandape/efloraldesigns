@@ -2,9 +2,10 @@ import { tabsStyles, liStyles } from '@/styles/Styles';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 import { IoPersonCircleSharp } from 'react-icons/io5';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { GetRole } from '@/components/GetRole';
+import Cookies from 'js-cookie';
 
 const SigninUser: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +16,7 @@ const SigninUser: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const getUser = Cookies.get('user');
-  const userRole = getUser ? JSON.parse(getUser).role[0] : '';
+  const userRole = GetRole();
 
   const handleLogout = () => {
     Swal.fire({

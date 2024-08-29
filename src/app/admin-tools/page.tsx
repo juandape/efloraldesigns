@@ -25,11 +25,11 @@ export default function AdminTools() {
             <p>View and edit all contact messages</p>
           </Link>
           <Link
-            href='/admin-tools/edit-pages'
+            href='/admin-tools/upload-files'
             className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
           >
             <RiImageEditFill className='text-2xl ml-2' />
-            <p>View and edit all pages</p>
+            <p>Upload Images and videos</p>
           </Link>
         </div>
       </div>
