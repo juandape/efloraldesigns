@@ -12,7 +12,7 @@ export default function Birthday() {
   return (
     <div className='mb-10'>
       <TopHeader
-        imageSrc={birthdaybanner.src}
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725035176/efloraldesigns/birthdaybanner_p3qvyh.jpg'
         imageAlt='Birthday'
         title='Birthday'
         headerText='Celebrate your birthday with our beautiful flowers'

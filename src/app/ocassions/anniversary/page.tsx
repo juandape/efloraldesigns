@@ -1,7 +1,6 @@
 'use client';
 
 import TopHeader from '@/components/TopHeader';
-import anniversarybanner from '@/images/flores/anniversarybanner.webp';
 import Carousel from '@/components/Carousel';
 import flor5 from '@/images/flores/flor5.jpeg';
 import flor6 from '@/images/flores/flor6.webp';
@@ -12,7 +11,7 @@ export default function Anniversary() {
   return (
     <div className='mb-10'>
       <TopHeader
-        imageSrc={anniversarybanner.src}
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034060/efloraldesigns/c1ba2e6a8db10b5b718c900c17105701.webp'
         imageAlt='Anniversary'
         title='Anniversary'
         headerText='Celebrate your anniversary with our beautiful flowers'

@@ -1,11 +1,10 @@
 import TopHeader from '@/components/TopHeader';
-import about from '@/images/about.jpg';
 
 export default function About() {
   return (
     <>
       <TopHeader
-        imageSrc={about.src}
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034144/efloraldesigns/d3d3836b507ea90e0b716a52780d9c59.webp'
         imageAlt='About Us'
         title='About Us'
         headerText='We are a floral design company that specializes in creating unique and

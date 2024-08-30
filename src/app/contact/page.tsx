@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import TopHeader from '../../components/TopHeader';
-import contact from '../../images/contact.jpg';
 import { buttonStyles, labelStyles, inputStyles } from '@/styles/Styles';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -56,7 +55,7 @@ export default function Contact() {
   return (
     <>
       <TopHeader
-        imageSrc={contact.src}
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034167/efloraldesigns/0ce0548a6772770aebbfeca8994acac6.jpg'
         imageAlt='Contact Us'
         title='Contact Us'
         headerText='We would love to hear from you! Please feel free to reach out to us with any questions or comments you may have.'

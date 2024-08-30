@@ -91,11 +91,14 @@ export default function ImageHandler() {
         },
       });
 
-      Swal.fire({
-        title: 'Files uploaded successfully',
-        icon: 'success',
-      });
-      setForm(InitialForm);
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Files uploaded successfully',
+          icon: 'success',
+        }).then(() => {
+          window.location.reload();
+        });
+      }
     } catch (error) {
       Swal.fire({
         title: 'An error occurred',
@@ -121,7 +124,7 @@ export default function ImageHandler() {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg'
+      className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'
     >
       <label className={labelStyles}>Select images</label>
       <input
@@ -164,7 +167,7 @@ export default function ImageHandler() {
         className={inputStyles}
         required
       >
-        <option value='Select ocassion' hidden>
+        <option value='' hidden>
           Select ocassion
         </option>
         <option value='birthday'>Birthday</option>

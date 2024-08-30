@@ -1,18 +1,16 @@
 'use client';
 
 import TopHeader from '@/components/TopHeader';
-import flores from '@/images/flores.webp';
 import Weddings from './components/Weddings';
 import Birthday from './components/Birthday';
 import Anniversary from './components/Anniversary';
 
 export default function Dashboard() {
-  const imageSrc = flores.src;
   return (
     <div className='mb-10'>
       <TopHeader
-        imageSrc={imageSrc}
-        imageAlt='banner'
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034120/efloraldesigns/e2d267e6915cf593b563ad20b2762331.webp'
+        imageAlt='Homebanner'
         title='E Floral Designs'
         headerText='Your better choice for your special occasions'
       />

@@ -1,7 +1,6 @@
 'use client';
 
 import TopHeader from '@/components/TopHeader';
-import wedbanner from '@/images/flores/wedbanner.png';
 import Carousel from '@/components/Carousel';
 import flor5 from '@/images/flores/flor5.jpeg';
 import flor6 from '@/images/flores/flor6.webp';
@@ -12,7 +11,7 @@ export default function Weddings() {
   return (
     <div className='mb-10'>
       <TopHeader
-        imageSrc={wedbanner.src}
+        imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034086/efloraldesigns/122282e1a1f1846019313044fedbdbfb.png'
         imageAlt='Weddings'
         title='Weddings'
         headerText='We have the perfect flowers for your special day'
