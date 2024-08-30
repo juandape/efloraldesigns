@@ -3,7 +3,7 @@ import { MdOutlineBackspace } from 'react-icons/md';
 
 export default function UploadFiles() {
   return (
-    <div className='mb-10'>
+    <div className='pb-10 bg-pink h-screen'>
       <a href='/admin-tools' className='absolute left-96 mt-10'>
         <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
       </a>
@@ -15,9 +15,7 @@ export default function UploadFiles() {
       <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
         Upload images and videos to the website
       </p>
-      <section>
         <ImageHandler />
-      </section>
     </div>
   );
 }

@@ -119,59 +119,62 @@ export default function ImageHandler() {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className='flex flex-col w-1/2 border mx-auto p-10'
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg'
+    >
+      <label className={labelStyles}>Select images</label>
+      <input
+        type='file'
+        name='images'
+        onChange={handleChange}
+        accept='image/*'
+        className={inputStyles}
+        multiple
+      />
+      <label className={labelStyles}>Name of the image</label>
+      <input
+        type='text'
+        name='imageName'
+        value={form.imageName}
+        onChange={handleChange}
+        className={inputStyles}
+      />
+      <label className={labelStyles}>Select videos</label>
+      <input
+        type='file'
+        name='video'
+        onChange={handleChange}
+        accept='video/*'
+        className={inputStyles}
+        multiple
+      />
+      <label className={labelStyles}>Name of the video</label>
+      <input
+        type='text'
+        name='videoName'
+        value={form.videoName}
+        onChange={handleChange}
+        className={inputStyles}
+      />
+      <label className={labelStyles}>Ocassion Type</label>
+      <select
+        name='ocassion'
+        onChange={handleChange}
+        className={inputStyles}
+        required
       >
-        <label className={labelStyles}>Select images</label>
-        <input
-          type='file'
-          name='images'
-          onChange={handleChange}
-          accept='image/*'
-          className={inputStyles}
-          multiple
-        />
-        <label className={labelStyles}>Name of the image</label>
-        <input
-          type='text'
-          name='imageName'
-          value={form.imageName}
-          onChange={handleChange}
-          className={inputStyles}
-        />
-        <label className={labelStyles}>Select videos</label>
-        <input
-          type='file'
-          name='video'
-          onChange={handleChange}
-          accept='video/*'
-          className={inputStyles}
-          multiple
-        />
-        <label className={labelStyles}>Name of the video</label>
-        <input
-          type='text'
-          name='videoName'
-          value={form.videoName}
-          onChange={handleChange}
-          className={inputStyles}
-        />
-        <label className={labelStyles}>Ocassion Type</label>
-        <select name='ocassion' onChange={handleChange} className={inputStyles} required>
-          <option value='Select ocassion' hidden>
-            Select ocassion
-          </option>
-          <option value='birthday'>Birthday</option>
-          <option value='anniversary'>Anniversary</option>
-          <option value='weddings'>Weddings</option>
-          <option value='homepage'>HomePage</option>
-        </select>
-        <button type='submit' className={buttonStyles}>
-          Upload
-        </button>
-      </form>
-    </div>
+        <option value='Select ocassion' hidden>
+          Select ocassion
+        </option>
+        <option value='birthday'>Birthday</option>
+        <option value='anniversary'>Anniversary</option>
+        <option value='weddings'>Weddings</option>
+        <option value='homepage'>HomePage</option>
+      </select>
+      <button type='submit' className={buttonStyles}>
+        Upload
+      </button>
+    </form>
   );
 }

@@ -100,7 +100,7 @@ export default function ContactMessages() {
   });
 
   return (
-    <section className='relative p-6'>
+    <section className='relative p-6 bg-pink'>
       <a href='/admin-tools' className='absolute left-96 mt-10'>
         <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
       </a>
@@ -191,7 +191,7 @@ export default function ContactMessages() {
       <div className='flex flex-col sm:w-1/3 mx-auto'>
         {filteredMessages.length > 0 ? (
           filteredMessages.map((message) => (
-            <div key={message._id} className='border p-4 mb-4 rounded-lg'>
+            <div key={message._id} className='border p-4 mb-4 rounded-lg bg-white shadow-lg'>
               <h3 className='text-lg font-bold text-blue-sky'>
                 {message.name}
               </h3>
