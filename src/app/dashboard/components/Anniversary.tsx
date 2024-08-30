@@ -1,31 +1,49 @@
-import React from 'react';
-import Carousel from '@/components/Carousel';
-import flor9 from '@/images/flores/flor9.webp';
-import flor10 from '@/images/flores/flor10.jpg';
-import flor11 from '@/images/flores/flor11.webp';
-import flor12 from '@/images/flores/flor12.webp';
+'use client';
 
-const flowersItems = [
-  {
-    name: 'Rouses',
-    image: flor9.src,
-  },
-  {
-    name: 'Bouquet',
-    image: flor10.src,
-  },
-  {
-    name: 'White flowers',
-    image: flor11.src,
-  },
-  {
-    name: 'Sunflowers',
-    image: flor12.src,
-  },
-  // Add more items as needed
-];
+import React, { useEffect } from 'react';
+import Carousel from '@/components/Carousel';
+import axios from 'axios';
+import { token, GetRole } from '@/components/GetRole';
+import Swal from 'sweetalert2';
+import flor9 from '@/images/flores/flor9.webp';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const url = `${BASE_URL}/api/flowers`;
+
+interface Flower {
+  imageName: string;
+  ocassion: string;
+  image: string;
+}
 
 const Anniversary: React.FC = () => {
+  const [flowers, setFlowers] = React.useState<Flower[]>([]);
+  const role = GetRole();
+
+  useEffect(() => {
+    const fetchFlowers = async () => {
+      try {
+        const response = await axios.get(url);
+        setFlowers(response.data.flowers);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchFlowers();
+  }, []);
+
+  console.log(flowers);
+
+  const flowersItems = flowers
+    .filter((flower) => flower.ocassion === 'anniversary')
+    .map((flower) => {
+      return {
+        name: flower.imageName,
+        image: flower.image,
+      };
+    });
+  console.log(flowersItems);
+
   return (
     <Carousel
       items={flowersItems}

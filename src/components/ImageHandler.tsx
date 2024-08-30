@@ -3,11 +3,8 @@
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { GetRole } from './GetRole';
+import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
-import Cookies from 'js-cookie';
-
-const token = Cookies.get('token');
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;

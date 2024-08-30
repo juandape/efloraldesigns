@@ -18,3 +18,5 @@ export function GetRole() {
 
   return role;
 }
+
+export const token = Cookies.get('token');

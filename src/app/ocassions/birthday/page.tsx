@@ -1,7 +1,6 @@
 'use client';
 
 import TopHeader from '@/components/TopHeader';
-import birthdaybanner from '@/images/flores/birthdaybanner.jpg';
 import Carousel from '@/components/Carousel';
 import flor5 from '@/images/flores/flor5.jpeg';
 import flor6 from '@/images/flores/flor6.webp';
