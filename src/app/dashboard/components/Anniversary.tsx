@@ -32,17 +32,15 @@ const Anniversary: React.FC = () => {
     fetchFlowers();
   }, []);
 
-  console.log(flowers);
-
   const flowersItems = flowers
-    .filter((flower) => flower.ocassion === 'anniversary')
+    .filter((flower) => flower.ocassion === 'anniversary') // Filter by ocassion
+    .slice(0, 4) // Show only 4 items
     .map((flower) => {
       return {
         name: flower.imageName,
         image: flower.image,
       };
     });
-  console.log(flowersItems);
 
   return (
     <Carousel

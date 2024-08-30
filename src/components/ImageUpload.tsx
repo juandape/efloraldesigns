@@ -17,7 +17,7 @@ const InitialForm = {
   ocassion: '',
 };
 
-export default function ImageHandler() {
+export default function ImageUpload() {
   const [form, setForm] = useState(InitialForm);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);

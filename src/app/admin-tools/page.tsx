@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { RiEdit2Line, RiImageEditFill, RiEditBoxLine } from 'react-icons/ri';
+import {
+  RiEdit2Line,
+  RiImageEditFill,
+  RiEditBoxLine,
+  RiFileUploadFill,
+} from 'react-icons/ri';
 
 export default function AdminTools() {
   return (
@@ -10,10 +15,10 @@ export default function AdminTools() {
         </h2>
       </div>
       <div className='flex flex-col my-5 border w-96 sm:w-1/3 mx-auto bg-white py-10 rounded-xl shadow-xl animate-slideUp mt-20'>
-      <p className='text-blue-sky text-base sm:text-3xl text-center mt-5 mb-2 mx-5 sm:mx-20 font-semibold'>
-        Manage your website
+        <p className='text-blue-sky text-base sm:text-3xl text-center mt-5 mb-2 mx-5 sm:mx-20 font-semibold'>
+          Manage your website
         </p>
-        <hr className='border-blue-sky mb-10 w-60 sm:w-96 mx-auto'/>
+        <hr className='border-blue-sky mb-10 w-60 sm:w-96 mx-auto' />
         <div className='mx-auto sm:text-xl'>
           <Link
             href='/admin-tools/users'
@@ -33,8 +38,15 @@ export default function AdminTools() {
             href='/admin-tools/upload-files'
             className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
           >
-            <RiImageEditFill className='text-2xl ml-2' />
+            <RiFileUploadFill className='text-2xl ml-2' />
             <p>Upload Images and videos</p>
+          </Link>
+          <Link
+            href='/admin-tools/edit-files'
+            className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
+          >
+            <RiImageEditFill className='text-2xl ml-2' />
+            <p>Edit Images and videos</p>
           </Link>
         </div>
       </div>
