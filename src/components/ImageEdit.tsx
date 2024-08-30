@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
-import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
+import { buttonStyles, inputStyles } from '@/styles/Styles';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -22,10 +22,13 @@ interface MediaItem {
 export default function MediaManager() {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [editingMediaId, setEditingMediaId] = useState<string | null>(null);
-  const [updatedName, setUpdatedName] = useState<string>('');
+  const [updatedImageName, setUpdatedImageName] = useState<string>('');
+  const [updatedVideoName, setUpdatedVideoName] = useState<string>('');
   const [updatedOcassion, setUpdatedOcassion] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>(''); // New state for search term
   const role = GetRole();
+
+  console.log(role, token);
 
   useEffect(() => {
     const fetchMediaItems = async () => {
@@ -50,7 +53,8 @@ export default function MediaManager() {
 
   const handleEdit = (media: MediaItem) => {
     setEditingMediaId(media._id);
-    setUpdatedName(media.imageName || media.videoName || ''); // Load current name
+    setUpdatedImageName(media.imageName || ''); // Load current image name
+    setUpdatedVideoName(media.videoName || ''); // Load current video name
     setUpdatedOcassion(media.ocassion || ''); // Load current ocassion
   };
 
@@ -105,8 +109,8 @@ export default function MediaManager() {
       await axios.patch(
         `${url}/${editingMediaId}`,
         {
-          imageName: updatedName,
-          videoName: updatedName,
+          imageName: updatedImageName,
+          videoName: updatedVideoName,
           ocassions: updatedOcassion,
         },
         {
@@ -120,13 +124,20 @@ export default function MediaManager() {
       setMediaItems((prevItems) =>
         prevItems.map((item) =>
           item._id === editingMediaId
-            ? { ...item, imageName: updatedName, videoName: updatedName } // Update only the name fields
+            ? {
+                ...item,
+                imageName: updatedImageName,
+                videoName: updatedVideoName,
+                ocassion: updatedOcassion,
+              } // Update only the name fields
             : item
         )
       );
 
       setEditingMediaId(null);
-      setUpdatedName(''); // Reset input field
+      setUpdatedImageName(''); // Reset input field
+      setUpdatedVideoName(''); // Reset
+      setUpdatedOcassion(''); // Reset
 
       Swal.fire({
         title: 'Media updated successfully',
@@ -143,8 +154,15 @@ export default function MediaManager() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setUpdatedName(e.target.value);
-    setUpdatedOcassion(e.target.value);
+    const { name, value } = e.target; // Destructure name and value from the target
+
+    if (name === 'imageName') {
+      setUpdatedImageName(value);
+    } else if (name === 'videoName') {
+      setUpdatedVideoName(value);
+    } else if (name === 'ocassion') {
+      setUpdatedOcassion(value);
+    }
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -223,7 +241,8 @@ export default function MediaManager() {
                   <label className='mr-12'>Edit Name</label>
                   <input
                     type='text'
-                    value={updatedName}
+                    name={'imageName' || 'videoName'}
+                    value={updatedImageName || updatedVideoName}
                     onChange={handleChange}
                     className={inputStyles}
                   />
@@ -231,10 +250,14 @@ export default function MediaManager() {
                 <div className='ml-20'>
                   <label className='mr-5'>Edit Ocassion</label>
                   <select
+                    name='ocassion'
                     value={updatedOcassion}
                     onChange={handleChange}
                     className={`w-56 ${inputStyles}`}
                   >
+                    <option value='' hidden>
+                      Select new ocassion
+                    </option>
                     <option value='anniversary'>Anniversary</option>
                     <option value='birthday'>Birthday</option>
                     <option value='weddings'>Wedding</option>
@@ -247,7 +270,9 @@ export default function MediaManager() {
                   <button
                     onClick={() => {
                       setEditingMediaId(null);
-                      setUpdatedName(''); // Reset input field on cancel
+                      setUpdatedImageName(''); // Reset input field on cancel
+                      setUpdatedVideoName('');
+                      setUpdatedOcassion('');
                     }}
                     className={buttonStyles}
                   >
