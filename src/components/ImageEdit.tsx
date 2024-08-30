@@ -24,6 +24,7 @@ export default function MediaManager() {
   const [editingMediaId, setEditingMediaId] = useState<string | null>(null);
   const [updatedName, setUpdatedName] = useState<string>('');
   const [updatedOcassion, setUpdatedOcassion] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>(''); // New state for search term
   const role = GetRole();
 
   useEffect(() => {
@@ -63,7 +64,6 @@ export default function MediaManager() {
         return;
       }
 
-      // Show confirmation dialog
       const result = await Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -117,7 +117,6 @@ export default function MediaManager() {
         }
       );
 
-      // Update the local state to reflect the changes
       setMediaItems((prevItems) =>
         prevItems.map((item) =>
           item._id === editingMediaId
@@ -148,10 +147,31 @@ export default function MediaManager() {
     setUpdatedOcassion(e.target.value);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value); // Update search term state
+  };
+
+  // Filter media items based on search term
+  const filteredMediaItems = mediaItems.filter(
+    (media) =>
+      media.imageName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      media.videoName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      media.ocassion?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className='media-manager'>
+      <div className='search-bar mb-4 text-center'>
+        <input
+          type='text'
+          placeholder='Search by name or occasion'
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className={`w-80 ${inputStyles}`}
+        />
+      </div>
       <div className='media-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-5'>
-        {mediaItems.map((media) => (
+        {filteredMediaItems.map((media) => (
           <div
             key={media._id}
             className='media-item border p-4 rounded-lg shadow-lg'
