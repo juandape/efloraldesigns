@@ -1,7 +1,7 @@
 import { tabsStyles, liStyles } from '@/styles/Styles';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
-import { IoPersonCircleSharp } from 'react-icons/io5';
+import { RiFlowerLine } from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { GetRole } from '@/components/GetRole';
@@ -55,7 +55,7 @@ const SigninUser: React.FC = () => {
           className={`inline-flex sm:justify-center items-center w-full py-2 ${tabsStyles}`}
           onClick={toggleDropdown}
         >
-          <IoPersonCircleSharp className='text-2xl' />
+          <RiFlowerLine className='text-2xl' />
         </button>
       </div>
 

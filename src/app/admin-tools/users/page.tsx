@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { GetRole, token } from '@/components/GetRole';
 import { tableHeaderStyles, tableRowStyles } from '@/styles/Styles';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
@@ -16,9 +16,9 @@ export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const role = GetRole();
 
   useEffect(() => {
-    const token = Cookies.get('token');
     if (!token) {
       return;
     }
@@ -27,6 +27,7 @@ export default function Users() {
       .get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'X-User-Role': role,
         },
       })
       .then((response) => {
@@ -53,7 +54,6 @@ export default function Users() {
 
   const handleDelete = (userId: number) => {
     console.log('delete', userId);
-    const token = Cookies.get('token');
     if (!token) {
       return;
     }
@@ -71,6 +71,7 @@ export default function Users() {
             .delete(`${url}/${userId}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
+                'X-User-Role': role,
               },
             })
             .then(() => {

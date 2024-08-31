@@ -35,6 +35,7 @@ export default function ContactMessages() {
       .get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'X-User-Role': role,
         },
       })
       .then((response) => {
