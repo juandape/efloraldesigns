@@ -31,9 +31,9 @@ const SigninUser: React.FC = () => {
         Cookies.remove('token');
         Cookies.remove('user');
         location.reload();
-        router.push('/');
       }
     });
+    router.push('/');
   };
 
   const handleClickOutside = (event: MouseEvent) => {
