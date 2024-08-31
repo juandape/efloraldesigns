@@ -2,9 +2,10 @@
 
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
-import Cookies from 'js-cookie';
+import { GetRole, token } from '@/components/GetRole';
 import { MdOutlineBackspace } from 'react-icons/md';
 import { tabsStyles, liStyles } from '@/styles/Styles';
+import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/contact-messages`;
@@ -24,9 +25,9 @@ export default function ContactMessages() {
   const [filterCategory, setFilterCategory] = useState<string>('name');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const role = GetRole();
 
   useEffect(() => {
-    const token = Cookies.get('token');
     if (!token) {
       return;
     }
@@ -72,7 +73,10 @@ export default function ContactMessages() {
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsDropdownOpen(false);
     }
   };
@@ -98,6 +102,44 @@ export default function ContactMessages() {
     }
     return false;
   });
+
+  const handleDelete = (id: number) => {
+    if (!token) {
+      return;
+    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this message!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${url}/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'X-User-Role': role,
+            },
+          })
+          .then(() => {
+            setContactMessages((prevMessages) =>
+              prevMessages.filter((message) => message._id !== id)
+            );
+            Swal.fire('Deleted!', 'The message has been deleted.', 'success');
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire(
+              'Error',
+              'An error occurred while deleting the message.',
+              'error'
+            );
+          });
+      }
+    });
+  };
 
   return (
     <section className='relative p-6 bg-pink'>
@@ -129,7 +171,9 @@ export default function ContactMessages() {
             className={`inline-flex sm:justify-center items-center w-full py-3 px-3 rounded-lg bg-gray-100 ${tabsStyles}`}
             onClick={toggleDropdown}
           >
-            {` Filter by ${filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)}`}
+            {` Filter by ${
+              filterCategory.charAt(0).toUpperCase() + filterCategory.slice(1)
+            }`}
             <svg
               className='-mr-1 ml-2 h-5 w-5'
               xmlns='http://www.w3.org/2000/svg'
@@ -191,7 +235,10 @@ export default function ContactMessages() {
       <div className='flex flex-col sm:w-1/3 mx-auto'>
         {filteredMessages.length > 0 ? (
           filteredMessages.map((message) => (
-            <div key={message._id} className='border p-4 mb-4 rounded-lg bg-white shadow-lg'>
+            <div
+              key={message._id}
+              className='border p-4 mb-4 rounded-lg bg-white shadow-lg'
+            >
               <h3 className='text-lg font-bold text-blue-sky'>
                 {message.name}
               </h3>
@@ -201,6 +248,12 @@ export default function ContactMessages() {
               <p className='text-gray-500'>Email: {message.email}</p>
               <p className='text-gray-500'>Phone: {message.phone}</p>
               <p className='text-gray-500'>Message: {message.message}</p>
+              <button
+                onClick={() => handleDelete(message._id)}
+                className='bg-red-600 hover:border-red-600 hover:border hover:text-red-600 hover:bg-white text-white py-2.5 px-2 rounded-xl mt-4'
+              >
+                Delete
+              </button>
             </div>
           ))
         ) : (
