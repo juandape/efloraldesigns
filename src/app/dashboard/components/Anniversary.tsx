@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Carousel from '@/components/Carousel';
-import { useFetchFlowersByOccasion } from './useFetchFlowersByOcassion';
+import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
 
 const Anniversary: React.FC = () => {
   const { flowers, error } = useFetchFlowersByOccasion('anniversary');
@@ -29,6 +29,7 @@ const Anniversary: React.FC = () => {
       elementId='slider'
       visibleClass='animate-slide-right'
       hiddenClass='block'
+      limit={4}
     />
   );
 };

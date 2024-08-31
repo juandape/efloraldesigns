@@ -16,6 +16,7 @@ interface CarouselProps {
   elementId: string;
   visibleClass: string;
   hiddenClass: string;
+  limit?: number;
 }
 
 const NextArrow: React.FC<CustomArrowProps> = (props) => {
@@ -73,8 +74,10 @@ const useScrollAnimation = (elementId: string, threshold = 0.5) => {
   return isVisible;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementId, visibleClass, hiddenClass }) => {
+const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementId, visibleClass, hiddenClass, limit }) => {
   const sliderVisible = useScrollAnimation(elementId);
+
+  const displayedItems = limit ? items.slice(0, limit) : items;
 
   const settings = {
     dots: false,
@@ -129,7 +132,7 @@ const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementI
       </h2>
       {description && <p className='text-lg text-center mb-10 font-semibold'>{description}</p>}
       <Slider {...settings}>
-        {items.map((item, index) => (
+        {displayedItems.map((item, index) => (
           <div key={index} className='flex justify-center'>
             <img
               src={item.image}

@@ -13,7 +13,7 @@ interface Flower {
   position?: number;
 }
 
-export const useFetchFlowersByOccasion = (occasion: string, limit: number = 4) => {
+export const useFetchFlowersByOccasion = (occasion: string) => {
   const [flowers, setFlowers] = useState<Flower[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,9 +21,9 @@ export const useFetchFlowersByOccasion = (occasion: string, limit: number = 4) =
     const fetchFlowers = async () => {
       try {
         const response = await axios.get(url);
-        const filteredFlowers = response.data.flowers
-          .filter((flower: Flower) => flower.ocassion === occasion)
-          .slice(0, limit);
+        const filteredFlowers = response.data.flowers.filter(
+          (flower: Flower) => flower.ocassion === occasion
+        );
         setFlowers(filteredFlowers);
       } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ export const useFetchFlowersByOccasion = (occasion: string, limit: number = 4) =
     };
 
     fetchFlowers();
-  }, [occasion, limit]);
+  }, [occasion]);
 
   return { flowers, error };
 };
