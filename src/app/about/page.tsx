@@ -12,7 +12,7 @@ export default function About() {
         work hard to bring your vision to life and create stunning bouquets that
         will make your special day even more memorable.'
       />
-      <section>
+      <section className='mb-20'>
         <p className='text-center text-lg sm:text-2xl font-semibold my-10 mx-5 sm:mx-20'>
           At E Floral Designs, we believe that flowers are an essential part of
           any celebration. Whether you are planning a wedding, birthday party,

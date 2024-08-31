@@ -60,7 +60,7 @@ export default function Contact() {
         title='Contact Us'
         headerText='We would love to hear from you! Please feel free to reach out to us with any questions or comments you may have.'
       />
-      <section>
+      <section className='mb-20'>
         <form
           className='flex flex-col w-96 sm:w-1/3 justify-center mx-auto border rounded-2xl py-6 px-10 shadow-xl'
           onSubmit={handleSubmit}
