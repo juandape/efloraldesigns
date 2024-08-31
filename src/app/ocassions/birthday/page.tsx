@@ -1,13 +1,28 @@
 'use client';
 
+import { useEffect } from 'react';
 import TopHeader from '@/components/TopHeader';
 import Carousel from '@/components/Carousel';
-import flor5 from '@/images/flores/flor5.jpeg';
-import flor6 from '@/images/flores/flor6.webp';
-import flor7 from '@/images/flores/flor7.jpeg';
-import flor8 from '@/images/flores/flor8.jpeg';
+import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
 
 export default function Birthday() {
+  const { flowers, error } = useFetchFlowersByOccasion('birthday');
+
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+
+  const displayedItems = flowers
+    .map((flower) => ({
+      name: flower.imageName,
+      image: flower.image,
+      ocassion: flower.ocassion,
+      position: flower.position || 1,
+    }))
+    .sort((a, b) => a.position - b.position);
+
   return (
     <div className='mb-10'>
       <TopHeader
@@ -18,54 +33,22 @@ export default function Birthday() {
       />
       <section>
         <Carousel
-          items={[
-            {
-              name: 'Bear',
-              image: flor5.src,
-            },
-            {
-              name: 'Birthday bouquet',
-              image: flor6.src,
-            },
-            {
-              name: 'Bear with flowers',
-              image: flor7.src,
-            },
-            {
-              name: 'Ballons',
-              image: flor8.src,
-            },
-          ]}
+          items={displayedItems}
           title='Bouquetes'
           description='Our birthday bouquetes are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'
+          limit={10}
         />
         <Carousel
-          items={[
-            {
-              name: 'Bear',
-              image: flor5.src,
-            },
-            {
-              name: 'Birthday bouquet',
-              image: flor6.src,
-            },
-            {
-              name: 'Bear with flowers',
-              image: flor7.src,
-            },
-            {
-              name: 'Ballons',
-              image: flor8.src,
-            },
-          ]}
+          items={displayedItems}
           title='Flowers'
           description='Our birthday flowers are the perfect gift for your loved one.'
           elementId='slider2'
           visibleClass='animate-slide-right'
           hiddenClass='block'
+          limit={10}
         />
       </section>
     </div>
