@@ -105,21 +105,19 @@ export default function MediaManager() {
   const handleUpdate = async () => {
     if (!editingMediaId) return;
 
+    const FormData = {
+      imageName: updatedImageName,
+      videoName: updatedVideoName,
+      ocassion: updatedOcassion,
+    };
+
     try {
-      await axios.patch(
-        `${url}/${editingMediaId}`,
-        {
-          imageName: updatedImageName,
-          videoName: updatedVideoName,
-          ocassions: updatedOcassion,
+      await axios.patch(`${url}/${editingMediaId}`, FormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'X-User-Role': role,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'X-User-Role': role,
-          },
-        }
-      );
+      });
 
       setMediaItems((prevItems) =>
         prevItems.map((item) =>
