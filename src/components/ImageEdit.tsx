@@ -17,6 +17,7 @@ interface MediaItem {
   video?: string;
   videoName?: string;
   ocassion?: string;
+  position?: number;
 }
 
 export default function MediaManager() {
@@ -25,10 +26,9 @@ export default function MediaManager() {
   const [updatedImageName, setUpdatedImageName] = useState<string>('');
   const [updatedVideoName, setUpdatedVideoName] = useState<string>('');
   const [updatedOcassion, setUpdatedOcassion] = useState<string>('');
-  const [searchTerm, setSearchTerm] = useState<string>(''); // New state for search term
+  const [updatedPosition, setUpdatedPosition] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const role = GetRole();
-
-  console.log(role, token);
 
   useEffect(() => {
     const fetchMediaItems = async () => {
@@ -56,6 +56,7 @@ export default function MediaManager() {
     setUpdatedImageName(media.imageName || ''); // Load current image name
     setUpdatedVideoName(media.videoName || ''); // Load current video name
     setUpdatedOcassion(media.ocassion || ''); // Load current ocassion
+    setUpdatedPosition(media.position || 1); // Load current position
   };
 
   const handleDelete = async (mediaId: string) => {
@@ -109,6 +110,7 @@ export default function MediaManager() {
       imageName: updatedImageName,
       videoName: updatedVideoName,
       ocassion: updatedOcassion,
+      position: updatedPosition,
     };
 
     try {
@@ -127,6 +129,7 @@ export default function MediaManager() {
                 imageName: updatedImageName,
                 videoName: updatedVideoName,
                 ocassion: updatedOcassion,
+                position: updatedPosition,
               } // Update only the name fields
             : item
         )
@@ -134,8 +137,9 @@ export default function MediaManager() {
 
       setEditingMediaId(null);
       setUpdatedImageName(''); // Reset input field
-      setUpdatedVideoName(''); // Reset
-      setUpdatedOcassion(''); // Reset
+      setUpdatedVideoName('');
+      setUpdatedOcassion('');
+      setUpdatedPosition(1);
 
       Swal.fire({
         title: 'Media updated successfully',
@@ -160,6 +164,8 @@ export default function MediaManager() {
       setUpdatedVideoName(value);
     } else if (name === 'ocassion') {
       setUpdatedOcassion(value);
+    } else if (name === 'position') {
+      setUpdatedPosition(parseInt(value));
     }
   };
 
@@ -260,6 +266,17 @@ export default function MediaManager() {
                     <option value='birthday'>Birthday</option>
                     <option value='weddings'>Wedding</option>
                   </select>
+                </div>
+                <div className='ml-20'>
+                  <label className='mr-5'>Edit Position</label>
+                  <input
+                    type='number'
+                    name='position'
+                    value={updatedPosition}
+                    onChange={handleChange}
+                    className={`w-56 ${inputStyles}`}
+                    min={1} // Asegurar que la posición sea al menos 1
+                  />
                 </div>
                 <div className='flex gap-4 w-60 mx-auto'>
                   <button onClick={handleUpdate} className={buttonStyles}>

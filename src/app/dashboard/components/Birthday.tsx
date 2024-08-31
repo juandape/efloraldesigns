@@ -1,31 +1,27 @@
-import React from 'react';
-import Carousel from '@/components/Carousel';
-import flor5 from '@/images/flores/flor5.jpeg';
-import flor6 from '@/images/flores/flor6.webp';
-import flor7 from '@/images/flores/flor7.jpeg';
-import flor8 from '@/images/flores/flor8.jpeg';
+'use client';
 
-const flowersItems = [
-  {
-    name: 'Bear',
-    image: flor5.src,
-  },
-  {
-    name: 'Birthday bouquet',
-    image: flor6.src,
-  },
-  {
-    name: 'Bear with flowers',
-    image: flor7.src,
-  },
-  {
-    name: 'Ballons',
-    image: flor8.src,
-  },
-  // Add more items as needed
-];
+import React, { useEffect } from 'react';
+import Carousel from '@/components/Carousel';
+import { useFetchFlowersByOccasion } from './useFetchFlowersByOcassion';
 
 const Birthday: React.FC = () => {
+  const { flowers, error } = useFetchFlowersByOccasion('birthday');
+
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+
+  const flowersItems = flowers
+    .map((flower) => ({
+      name: flower.imageName,
+      image: flower.image,
+      ocassion: flower.ocassion,
+      position: flower.position || 1,
+    }))
+    .sort((a, b) => a.position - b.position);
+
   return (
     <Carousel
       items={flowersItems}
