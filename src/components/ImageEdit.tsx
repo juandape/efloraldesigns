@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
-import { buttonStyles, inputStyles } from '@/styles/Styles';
+import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -18,6 +18,7 @@ interface MediaItem {
   videoName?: string;
   ocassion?: string;
   position?: number;
+  description?: string;
 }
 
 export default function MediaManager() {
@@ -27,6 +28,7 @@ export default function MediaManager() {
   const [updatedVideoName, setUpdatedVideoName] = useState<string>('');
   const [updatedOcassion, setUpdatedOcassion] = useState<string>('');
   const [updatedPosition, setUpdatedPosition] = useState<number>(1);
+  const [updatedDescription, setUpdatedDescription] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const role = GetRole();
 
@@ -57,6 +59,7 @@ export default function MediaManager() {
     setUpdatedVideoName(media.videoName || ''); // Load current video name
     setUpdatedOcassion(media.ocassion || ''); // Load current ocassion
     setUpdatedPosition(media.position || 1); // Load current position
+    setUpdatedDescription(media.description || ''); // Load current description
   };
 
   const handleDelete = async (mediaId: string) => {
@@ -111,6 +114,7 @@ export default function MediaManager() {
       videoName: updatedVideoName,
       ocassion: updatedOcassion,
       position: updatedPosition,
+      description: updatedDescription,
     };
 
     try {
@@ -130,6 +134,7 @@ export default function MediaManager() {
                 videoName: updatedVideoName,
                 ocassion: updatedOcassion,
                 position: updatedPosition,
+                description: updatedDescription,
               } // Update only the name fields
             : item
         )
@@ -140,6 +145,7 @@ export default function MediaManager() {
       setUpdatedVideoName('');
       setUpdatedOcassion('');
       setUpdatedPosition(1);
+      setUpdatedDescription('');
 
       Swal.fire({
         title: 'Media updated successfully',
@@ -153,19 +159,28 @@ export default function MediaManager() {
     }
   };
 
+  const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target; // Destructure name and value from the target
+    const capitalizedValue = capitalizeFirstLetter(value);
 
     if (name === 'imageName') {
-      setUpdatedImageName(value);
+      setUpdatedImageName(capitalizedValue);
     } else if (name === 'videoName') {
-      setUpdatedVideoName(value);
+      setUpdatedVideoName(capitalizedValue);
     } else if (name === 'ocassion') {
       setUpdatedOcassion(value);
     } else if (name === 'position') {
       setUpdatedPosition(parseInt(value));
+    } else if (name === 'description') {
+      setUpdatedDescription(capitalizedValue);
     }
   };
 
@@ -241,8 +256,8 @@ export default function MediaManager() {
 
             {editingMediaId === media._id && (
               <div className='edit-media mt-4'>
-                <div className='ml-20'>
-                  <label className='mr-12'>Edit Name</label>
+                <div className='flex flex-col mx-5 sm:mx-10'>
+                  <label className={labelStyles}>Edit Name</label>
                   <input
                     type='text'
                     name={'imageName' || 'videoName'}
@@ -251,13 +266,13 @@ export default function MediaManager() {
                     className={inputStyles}
                   />
                 </div>
-                <div className='ml-20'>
-                  <label className='mr-5'>Edit Ocassion</label>
+                <div className='flex flex-col mx-5 sm:mx-10'>
+                  <label className={labelStyles}>Edit Ocassion</label>
                   <select
                     name='ocassion'
                     value={updatedOcassion}
                     onChange={handleChange}
-                    className={`w-56 ${inputStyles}`}
+                    className={inputStyles}
                   >
                     <option value='' hidden>
                       Select new ocassion
@@ -265,17 +280,29 @@ export default function MediaManager() {
                     <option value='anniversary'>Anniversary</option>
                     <option value='birthday'>Birthday</option>
                     <option value='weddings'>Wedding</option>
+                    <option value='valentine'>Valentine</option>
+                    <option value='christmas'>Christmas</option>
+                    <option value='mothers-day'>Mother's Day</option>
                   </select>
                 </div>
-                <div className='ml-20'>
-                  <label className='mr-5'>Edit Position</label>
+                <div className='flex flex-col mx-5 sm:mx-10'>
+                  <label className={labelStyles}>Edit Position</label>
                   <input
                     type='number'
                     name='position'
                     value={updatedPosition}
                     onChange={handleChange}
-                    className={`w-56 ${inputStyles}`}
+                    className={inputStyles}
                     min={1} // Asegurar que la posición sea al menos 1
+                  />
+                </div>
+                <div className='flex flex-col mx-5 sm:mx-10'>
+                  <label className={labelStyles}>Edit Description</label>
+                  <textarea
+                    name='description'
+                    value={updatedDescription}
+                    onChange={handleChange}
+                    className={`h-40 resize-none ${inputStyles}`}
                   />
                 </div>
                 <div className='flex gap-4 w-60 mx-auto'>

@@ -20,6 +20,7 @@ export default function Birthday() {
       image: flower.image,
       ocassion: flower.ocassion,
       position: flower.position || 1,
+      description: flower.description,
     }))
     .sort((a, b) => a.position - b.position);
 
@@ -35,7 +36,7 @@ export default function Birthday() {
         <Carousel
           items={displayedItems}
           title='Bouquetes'
-          description='Our birthday bouquetes are the perfect gift for your loved one.'
+          carouselDescription='Our birthday bouquetes are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'
@@ -44,7 +45,7 @@ export default function Birthday() {
         <Carousel
           items={displayedItems}
           title='Flowers'
-          description='Our birthday flowers are the perfect gift for your loved one.'
+          carouselDescription='Our birthday flowers are the perfect gift for your loved one.'
           elementId='slider2'
           visibleClass='animate-slide-right'
           hiddenClass='block'

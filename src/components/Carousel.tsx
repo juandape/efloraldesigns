@@ -13,7 +13,7 @@ interface Item {
 interface CarouselProps {
   items: Item[];
   title: string;
-  description?: string;
+  carouselDescription?: string;
   elementId: string;
   visibleClass: string;
   hiddenClass: string;
@@ -78,7 +78,7 @@ const useScrollAnimation = (elementId: string, threshold = 0.5) => {
 const Carousel: React.FC<CarouselProps> = ({
   items,
   title,
-  description,
+  carouselDescription,
   elementId,
   visibleClass,
   hiddenClass,
@@ -140,8 +140,8 @@ const Carousel: React.FC<CarouselProps> = ({
       <h2 className='text-purple text-xl sm:text-4xl text-center my-10 font-semibold'>
         {title}
       </h2>
-      {description && (
-        <p className='text-lg text-center mb-10 font-semibold'>{description}</p>
+      {carouselDescription && (
+        <p className='text-lg text-center mb-10 font-semibold'>{carouselDescription}</p>
       )}
       <Slider {...settings}>
         {displayedItems.map((item, index) => (

@@ -20,6 +20,7 @@ export default function Anniversary() {
       image: flower.image,
       ocassion: flower.ocassion,
       position: flower.position || 1,
+      description: flower.description,
     }))
     .sort((a, b) => a.position - b.position);
 
@@ -35,7 +36,7 @@ export default function Anniversary() {
         <Carousel
           items={displayedItems}
           title='Bouquetes'
-          description='Our anniversary bouquetes are the perfect gift for your loved one.'
+          carouselDescription='Our anniversary bouquetes are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'
@@ -45,7 +46,7 @@ export default function Anniversary() {
         <Carousel
           items={displayedItems}
           title='Gifts'
-          description='Our anniversary gifts are the perfect gift for your loved one.'
+          carouselDescription='Our anniversary gifts are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'

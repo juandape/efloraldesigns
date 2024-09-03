@@ -20,6 +20,7 @@ export default function Weddings() {
       image: flower.image,
       ocassion: flower.ocassion,
       position: flower.position || 1,
+      description: flower.description,
     }))
     .sort((a, b) => a.position - b.position);
 
@@ -35,7 +36,7 @@ export default function Weddings() {
         <Carousel
           items={displayedItems}
           title='Bouquetes'
-          description='Our wedding bouquetes are the perfect gift for your loved one.'
+          carouselDescription='Our wedding bouquetes are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'
@@ -44,7 +45,7 @@ export default function Weddings() {
         <Carousel
           items={displayedItems}
           title='Gifts'
-          description='Our wedding gifts are the perfect gift for your loved one.'
+          carouselDescription='Our wedding gifts are the perfect gift for your loved one.'
           elementId='slider'
           visibleClass='animate-slide-right'
           hiddenClass='block'

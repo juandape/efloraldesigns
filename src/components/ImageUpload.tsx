@@ -170,7 +170,9 @@ export default function ImageUpload() {
         <option value='birthday'>Birthday</option>
         <option value='anniversary'>Anniversary</option>
         <option value='weddings'>Weddings</option>
-        <option value='homepage'>HomePage</option>
+        <option value='valentine'>Valentine</option>
+        <option value='christmas'>Christmas</option>
+        <option value='mothers-day'>Mother's Day</option>
       </select>
       <button type='submit' className={buttonStyles}>
         Upload

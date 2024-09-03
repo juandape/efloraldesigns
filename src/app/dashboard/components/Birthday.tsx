@@ -19,6 +19,7 @@ const Birthday: React.FC = () => {
       image: flower.image,
       ocassion: flower.ocassion,
       position: flower.position || 1,
+      description: flower.description,
     }))
     .sort((a, b) => a.position - b.position);
 
