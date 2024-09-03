@@ -17,14 +17,25 @@ export default function Dashboard() {
         title='E Floral Designs'
         headerText='Your better choice for your special occasions'
       />
-      <Anniversary />
-      <Weddings />
-      <Birthday />
-      <section>
-        Special Ocassions
+      <section className='mt-10'>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
+        <h2 className='text-center text-2xl sm:text-4xl my-10 font-bold'>
+          Special Ocassions
+        </h2>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
         <Mothers />
         <Valentine />
         <Christmas />
+      </section>
+      <section className='mt-10'>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
+        <h2 className='text-center text-2xl sm:text-4xl my-10 font-bold'>
+          Ocassions
+        </h2>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
+        <Anniversary />
+        <Weddings />
+        <Birthday />
       </section>
     </div>
   );
