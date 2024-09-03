@@ -12,8 +12,9 @@ import Ocassions from './components/Ocassions';
 import { useState, useEffect, useRef } from 'react';
 import { tabsStyles } from '@/styles/Styles';
 import Login from '@/components/Login';
-import Cookies from 'js-cookie';
+import { GetRole, token} from '@/components/GetRole';
 import SigninUser from '@/components/SigninUser';
+import SpecialOcassions from './components/SpecialOcassions';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +22,9 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
 
+  const role = GetRole();
+
   useEffect(() => {
-    const token = Cookies.get('token');
     if (token) {
       setIsLoggedIn(true);
     }
@@ -60,6 +62,7 @@ export default function Header() {
         <Img src={logo} alt='Logo' className='w-20' />
       </Link>
       <nav className='hidden md:flex items-center gap-10 mr-20'>
+        <SpecialOcassions />
         <Ocassions />
         <Link href='/about' className={tabsStyles}>
           About
@@ -89,6 +92,7 @@ export default function Header() {
           ref={menuRef}
           className='flex flex-col pl-10 absolute top-20 left-0 w-full bg-pink p-4 md:hidden z-50 animate-fadeIn'
         >
+          <SpecialOcassions />
           <Ocassions />
           <Link
             href='/about'

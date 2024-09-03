@@ -280,9 +280,9 @@ export default function MediaManager() {
                     <option value='anniversary'>Anniversary</option>
                     <option value='birthday'>Birthday</option>
                     <option value='weddings'>Wedding</option>
-                    <option value='valentine'>Valentine</option>
+                    <option value='valentines'>Valentine's Day</option>
                     <option value='christmas'>Christmas</option>
-                    <option value='mothers-day'>Mother's Day</option>
+                    <option value='mothers'>Mother's Day</option>
                   </select>
                 </div>
                 <div className='flex flex-col mx-5 sm:mx-10'>

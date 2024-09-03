@@ -4,6 +4,9 @@ import TopHeader from '@/components/TopHeader';
 import Weddings from './components/Weddings';
 import Birthday from './components/Birthday';
 import Anniversary from './components/Anniversary';
+import Mothers from './components/Mothers';
+import Valentine from './components/Valentines';
+import Christmas from './components/Christmas';
 
 export default function Dashboard() {
   return (
@@ -17,6 +20,12 @@ export default function Dashboard() {
       <Anniversary />
       <Weddings />
       <Birthday />
+      <section>
+        Special Ocassions
+        <Mothers />
+        <Valentine />
+        <Christmas />
+      </section>
     </div>
   );
 }

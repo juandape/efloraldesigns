@@ -149,7 +149,7 @@ const Carousel: React.FC<CarouselProps> = ({
             <img
               src={item.image}
               alt={item.name}
-              className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl'
+              className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl cursor-pointer'
               onClick={() => setSelectedItem(item)}
             />
             <p className='mt-5 text-lg text-purple'>{item.name}</p>
