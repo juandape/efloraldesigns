@@ -24,7 +24,7 @@ const NextArrow: React.FC<CustomArrowProps> = (props) => {
   const { onClick } = props;
   return (
     <div
-      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 right-0 sm:-mr-20 transform -translate-y-1/2 z-10 flex items-center justify-center h-10 w-10`}
+      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 right-0 sm:-mr-20 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
       <MdArrowForwardIos className='text-purple w-6 h-6' />
@@ -37,7 +37,7 @@ const PrevArrow: React.FC<CustomArrowProps> = (props) => {
   const { onClick } = props;
   return (
     <div
-      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 left-0 sm:-ml-20 pl-2 transform -translate-y-1/2 z-10 flex items-center justify-center h-10 w-10`}
+      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 left-0 sm:-ml-20 pl-2 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
       <MdArrowBackIos className='text-purple w-6 h-6' />
