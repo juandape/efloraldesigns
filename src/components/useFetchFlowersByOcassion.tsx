@@ -11,6 +11,7 @@ interface Flower {
   ocassion: string;
   image: string;
   position?: number;
+  description?: string;
 }
 
 export const useFetchFlowersByOccasion = (occasion: string) => {

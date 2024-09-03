@@ -3,6 +3,7 @@ import Slider, { CustomArrowProps } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import ImageModal from '@/components/ImageModal';
 
 interface Item {
   name: string;
@@ -23,7 +24,7 @@ const NextArrow: React.FC<CustomArrowProps> = (props) => {
   const { onClick } = props;
   return (
     <div
-      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 right-0 sm:-mr-20 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
+      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 right-0 sm:-mr-20 transform -translate-y-1/2 z-10 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
       <MdArrowForwardIos className='text-purple w-6 h-6' />
@@ -36,7 +37,7 @@ const PrevArrow: React.FC<CustomArrowProps> = (props) => {
   const { onClick } = props;
   return (
     <div
-      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 left-0 sm:-ml-20 pl-2 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
+      className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 left-0 sm:-ml-20 pl-2 transform -translate-y-1/2 z-10 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
       <MdArrowBackIos className='text-purple w-6 h-6' />
@@ -74,8 +75,17 @@ const useScrollAnimation = (elementId: string, threshold = 0.5) => {
   return isVisible;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementId, visibleClass, hiddenClass, limit }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  items,
+  title,
+  description,
+  elementId,
+  visibleClass,
+  hiddenClass,
+  limit,
+}) => {
   const sliderVisible = useScrollAnimation(elementId);
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
   const displayedItems = limit ? items.slice(0, limit) : items;
 
@@ -130,7 +140,9 @@ const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementI
       <h2 className='text-purple text-xl sm:text-4xl text-center my-10 font-semibold'>
         {title}
       </h2>
-      {description && <p className='text-lg text-center mb-10 font-semibold'>{description}</p>}
+      {description && (
+        <p className='text-lg text-center mb-10 font-semibold'>{description}</p>
+      )}
       <Slider {...settings}>
         {displayedItems.map((item, index) => (
           <div key={index} className='flex justify-center'>
@@ -138,11 +150,15 @@ const Carousel: React.FC<CarouselProps> = ({ items, title, description, elementI
               src={item.image}
               alt={item.name}
               className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl'
+              onClick={() => setSelectedItem(item)}
             />
             <p className='mt-5 text-lg text-purple'>{item.name}</p>
           </div>
         ))}
       </Slider>
+      {selectedItem && (
+        <ImageModal item={selectedItem} onClose={() => setSelectedItem(null)} />
+      )}
     </div>
   );
 };
