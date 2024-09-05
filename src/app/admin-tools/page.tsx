@@ -48,6 +48,13 @@ export default function AdminTools() {
             <RiImageEditFill className='text-2xl ml-2' />
             <p>Edit Images and videos</p>
           </Link>
+          <Link
+            href='/admin-tools/visibility-settings'
+            className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
+          >
+            <RiEdit2Line className='text-2xl ml-2' />
+            <p>Visibility settings for special ocassions</p>
+          </Link>
         </div>
       </div>
     </section>
