@@ -74,7 +74,7 @@ const AdminSettings = () => {
   };
 
   return (
-    <div className='pb-10 bg-pink'>
+    <div className='pb-10 bg-pink h-screen'>
       <a href='/admin-tools' className='absolute left-96 mt-10'>
         <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
       </a>
@@ -90,6 +90,7 @@ const AdminSettings = () => {
         onSubmit={handleSubmit}
         className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'
       >
+        <h3 className=' mb-5 text-2xl font-bold'>Tab:</h3>
         <div className='flex items-center'>
           <input
             type='checkbox'

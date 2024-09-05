@@ -58,8 +58,8 @@ export default function Header() {
         <Img src={logo} alt='Logo' className='w-20' />
       </Link>
       <nav className='hidden md:flex items-center gap-10 mr-20'>
-        <Ocassions />
         <SpecialOcassions />
+        <Ocassions />
         <Link href='/about' className={tabsStyles}>
           About
         </Link>
@@ -88,8 +88,8 @@ export default function Header() {
           ref={menuRef}
           className='flex flex-col pl-10 absolute top-20 left-0 w-full bg-pink p-4 md:hidden z-50 animate-fadeIn'
         >
-          <Ocassions />
           <SpecialOcassions />
+          <Ocassions />
           <Link
             href='/about'
             className={`${tabsStyles} my-2`}
