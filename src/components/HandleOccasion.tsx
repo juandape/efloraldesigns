@@ -79,7 +79,7 @@ const HandleOccasion: React.FC<HandleOccasionProps> = ({
               elementId={`${subcategory.toLowerCase()}-slider`}
               visibleClass='animate-slide-right'
               hiddenClass='block'
-              limit={10}
+              limit={30}
             />
           );
         })}
