@@ -31,11 +31,9 @@ export default function Login({ toggleModal }: Props) {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(data, url);
     axios
       .post(url, data)
       .then((res) => {
-        console.log(res.data);
         Cookies.set('token', res.data.token, { expires: 7 });
         Cookies.set('user', JSON.stringify(res.data.profile), { expires: 7 });
         Swal.fire({
