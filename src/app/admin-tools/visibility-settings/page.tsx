@@ -6,6 +6,8 @@ import { GetRole, token } from '@/components/GetRole';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/visibility-settings`;
 import Swal from 'sweetalert2';
+import { buttonStyles, labelStyles } from '@/styles/Styles';
+import { MdOutlineBackspace } from 'react-icons/md';
 
 const AdminSettings = () => {
   interface Settings {
@@ -68,34 +70,52 @@ const AdminSettings = () => {
       },
     });
     Swal.fire('Success!', 'Settings saved successfully!', 'success');
+    location.reload();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Mostrar "Special Occasions":
-        <input
-          type='checkbox'
-          name='showSpecialOccasions'
-          checked={settings.showSpecialOccasions}
-          onChange={handleChange}
-        />
-      </label>
-      <h3>Items del dropdown:</h3>
-      {settings.dropdownItems.map((item, index) => (
-        <div key={index}>
-          <label>
-            {item.name}:
+    <div className='pb-10 bg-pink'>
+      <a href='/admin-tools' className='absolute left-96 mt-10'>
+        <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
+      </a>
+      <div className='flex items-center justify-center'>
+        <h2 className='text-2xl xl:text-5xl mt-10 font-semibold w-80 xl:w-2/5 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn'>
+          Manage Visibility Settings
+        </h2>
+      </div>
+      <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
+        Customize the visibility settings for special occasions
+      </p>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'
+      >
+        <div className='flex items-center'>
+          <input
+            type='checkbox'
+            name='showSpecialOccasions'
+            checked={settings.showSpecialOccasions}
+            onChange={handleChange}
+            className='-mt-2'
+          />
+          <label className={labelStyles}>Show "Special Occasions" tab</label>
+        </div>
+
+        <h3 className=' mb-5 mt-10 text-2xl font-bold'>Dropdown Items:</h3>
+        {settings.dropdownItems.map((item, index) => (
+          <div key={index} className='flex items-center mb-2'>
             <input
               type='checkbox'
               checked={item.visible}
               onChange={() => handleDropdownChange(index)}
+              className='-mt-2'
             />
-          </label>
-        </div>
-      ))}
-      <button type='submit'>Guardar</button>
-    </form>
+            <label className={labelStyles}>{item.name}</label>
+          </div>
+        ))}
+        <button className={buttonStyles}>Save</button>
+      </form>
+    </div>
   );
 };
 
