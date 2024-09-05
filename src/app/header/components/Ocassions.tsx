@@ -60,10 +60,16 @@ const Ocassions: React.FC = () => {
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            {Occassions.map((ocassion, index) => (
-              <li key={index} className={liStyles}>
-                <Link href={ocassion.link}>{ocassion.name}</Link>
+            {Occassions.map((item, index) => (
+              <Link key={index} href={item.link}>
+              <li
+                className={liStyles}
+                role='menuitem'
+                onClick={toggleDropdown}
+              >
+                {item.name}
               </li>
+            </Link>
             ))}
           </ul>
         </div>
