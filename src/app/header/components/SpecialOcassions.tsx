@@ -2,7 +2,7 @@ import { tabsStyles, liStyles } from '@/styles/Styles';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { GetRole, token } from '@/components/GetRole';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/visibility-settings`;
@@ -14,22 +14,15 @@ const SpecialOcassions: React.FC = () => {
     showSpecialOccasions: boolean;
   } | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const role = GetRole();
-  console.log(settings)
 
   useEffect(() => {
     const fetchSettings = async () => {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-User-Role': role,
-        },
-      });
+      const response = await axios.get(url);
       setSettings(response.data);
     };
 
     fetchSettings();
-  }, [role]);
+  }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -47,7 +40,11 @@ const SpecialOcassions: React.FC = () => {
   }, []);
 
   if (!settings) {
-    return <div>Loading...</div>;
+    return (
+      <div className='mt-3'>
+        <AiOutlineLoading3Quarters className='animate-spin text-blue-sky'/>
+      </div>
+    );
   }
 
   return (

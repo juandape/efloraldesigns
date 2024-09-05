@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GetRole, token } from '@/components/GetRole';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const url = `${BASE_URL}/api/visibility-settings`;
-import Swal from 'sweetalert2';
 import { buttonStyles, labelStyles } from '@/styles/Styles';
 import { MdOutlineBackspace } from 'react-icons/md';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const url = `${BASE_URL}/api/visibility-settings`;
 
 const AdminSettings = () => {
   interface Settings {
@@ -27,12 +27,7 @@ const AdminSettings = () => {
 
   useEffect(() => {
     const fetchSettings = async () => {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-User-Role': role,
-        },
-      });
+      const response = await axios.get(url);
       setSettings(response.data);
     };
 
@@ -69,7 +64,6 @@ const AdminSettings = () => {
         'X-User-Role': role,
       },
     });
-    Swal.fire('Success!', 'Settings saved successfully!', 'success');
     location.reload();
   };
 
