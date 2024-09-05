@@ -33,8 +33,8 @@ export default function Dashboard() {
           Special Ocassions
         </h2>
         <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-        <Mothers />
         <Valentine />
+        <Mothers />
         <Christmas />
       </section>
     </div>
