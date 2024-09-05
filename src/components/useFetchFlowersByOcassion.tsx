@@ -9,6 +9,7 @@ const url = `${BASE_URL}/api/flowers`;
 interface Flower {
   imageName: string;
   ocassion: string;
+  subcategory: string;
   image: string;
   position?: number;
   description?: string;

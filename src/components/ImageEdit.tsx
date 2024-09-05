@@ -17,6 +17,7 @@ interface MediaItem {
   video?: string;
   videoName?: string;
   ocassion?: string;
+  subcategory?: string;
   position?: number;
   description?: string;
 }
@@ -30,7 +31,18 @@ export default function MediaManager() {
   const [updatedPosition, setUpdatedPosition] = useState<number>(1);
   const [updatedDescription, setUpdatedDescription] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [updatedSubcategory, setUpdatedSubcategory] = useState<string>('');
+
   const role = GetRole();
+
+  const occasionSubcategories: { [key: string]: string[] } = {
+    anniversary: ['Bouquets', 'Gifts'],
+    birthday: ['Party Supplies', 'Gifts'],
+    weddings: ['Bouquets', 'Decorations'],
+    valentines: ['Roses', 'Chocolates'],
+    christmas: ['Decorations', 'Gifts'],
+    mothers: ['Flowers', 'Gifts'],
+  };
 
   useEffect(() => {
     const fetchMediaItems = async () => {
@@ -113,6 +125,7 @@ export default function MediaManager() {
       imageName: updatedImageName,
       videoName: updatedVideoName,
       ocassion: updatedOcassion,
+      subcategory: updatedSubcategory,
       position: updatedPosition,
       description: updatedDescription,
     };
@@ -133,6 +146,7 @@ export default function MediaManager() {
                 imageName: updatedImageName,
                 videoName: updatedVideoName,
                 ocassion: updatedOcassion,
+                subcategory: updatedSubcategory,
                 position: updatedPosition,
                 description: updatedDescription,
               } // Update only the name fields
@@ -184,6 +198,12 @@ export default function MediaManager() {
     }
   };
 
+  const handleOccasionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOccasion = e.target.value;
+    setUpdatedOcassion(selectedOccasion);
+    setUpdatedSubcategory(''); // Reset the subcategory when changing occasion
+  };
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value); // Update search term state
   };
@@ -226,14 +246,19 @@ export default function MediaManager() {
                 className='w-80 mb-3 mx-auto'
               />
             )}
-
-            <h3 className='mb-2 text-center'>
-              <span className='font-bold'>Name:</span>{' '}
-              {media.imageName || media.videoName}
-            </h3>
-            <h3 className='mb-5 text-center'>
-              <span className='font-bold'>Ocassion:</span> {media.ocassion}
-            </h3>
+            <div className='mx-auto w-80'>
+              <h3 className='mb-2'>
+                <span className='font-bold'>Name:</span>{' '}
+                {media.imageName || media.videoName}
+              </h3>
+              <h3 className='mb-2'>
+                <span className='font-bold'>Ocassion:</span> {media.ocassion}
+              </h3>
+              <h3 className='mb-5'>
+                <span className='font-bold'>Subcategory:</span>{' '}
+                {media.subcategory}
+              </h3>
+            </div>
 
             <div className='flex gap-4 w-60 mx-auto'>
               {editingMediaId !== media._id && (
@@ -283,6 +308,28 @@ export default function MediaManager() {
                     <option value='valentines'>Valentine's Day</option>
                     <option value='christmas'>Christmas</option>
                     <option value='mothers'>Mother's Day</option>
+                  </select>
+                </div>
+                <div className='flex flex-col mx-5 sm:mx-10'>
+                  <label className={labelStyles}>Edit Subcategory</label>
+                  <select
+                    name='subcategory'
+                    value={updatedSubcategory}
+                    onChange={(e) => setUpdatedSubcategory(e.target.value)}
+                    className={inputStyles}
+                    disabled={!updatedOcassion} // Disable if no occasion is selected
+                  >
+                    <option value='' hidden>
+                      Select subcategory
+                    </option>
+                    {updatedOcassion &&
+                      occasionSubcategories[updatedOcassion].map(
+                        (subcategory) => (
+                          <option key={subcategory} value={subcategory}>
+                            {subcategory}
+                          </option>
+                        )
+                      )}
                   </select>
                 </div>
                 <div className='flex flex-col mx-5 sm:mx-10'>
