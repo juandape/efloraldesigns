@@ -27,7 +27,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ item, onClose }) => {
         </p>
 
         <button
-          className='absolute top-2 right-8 text-white text-2xl font-bold bg-slate-400 rounded-xl w-6 h-6 flex items-center justify-center hover:bg-slate-500 transition duration-300'
+          className='absolute top-2 right-8 text-white p-3.5 text-2xl font-bold bg-slate-400 rounded-xl w-6 h-6 flex items-center justify-center hover:bg-slate-500 transition duration-300'
           onClick={onClose}
         >
           &times;
