@@ -21,8 +21,14 @@ const Ocassions: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const Occassions = [
+    { name: 'Anniversary', link: '/ocassions/anniversary' },
+    { name: 'Birthday', link: '/ocassions/birthday' },
+    { name: 'Weddings', link: '/ocassions/weddings' },
+  ];
+
   return (
-    <div className='relative inline-block text-left z-50' ref={ref}>
+    <div className='relative inline-block text-left z-[999]' ref={ref}>
       <div>
         <button
           type='button'
@@ -54,21 +60,11 @@ const Ocassions: React.FC = () => {
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            <Link href='/ocassions/anniversary'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Anniversary
+            {Occassions.map((ocassion, index) => (
+              <li key={index} className={liStyles}>
+                <Link href={ocassion.link}>{ocassion.name}</Link>
               </li>
-            </Link>
-            <Link href='/ocassions/birthday'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Birthday
-              </li>
-            </Link>
-            <Link href='/ocassions/weddings'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Weddings
-              </li>
-            </Link>
+            ))}
           </ul>
         </div>
       )}

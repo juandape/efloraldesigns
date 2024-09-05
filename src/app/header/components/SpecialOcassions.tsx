@@ -21,6 +21,12 @@ const SpecialOcassions: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const specialOccassions = [
+    { name: 'Valentine\'s Day', link: '/special-ocassions/valentines' },
+    { name: 'Mother\'s Day', link: '/special-ocassions/mothers' },
+    { name: 'Christmas', link: '/special-ocassions/christmas' },
+  ];
+
   return (
     <div className='relative inline-block text-left z-50' ref={ref}>
       <div>
@@ -54,21 +60,17 @@ const SpecialOcassions: React.FC = () => {
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            <Link href='/special-ocassions/valentines'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Valentine's Day
-              </li>
-            </Link>
-            <Link href='/special-ocassions/mothers'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Mother's Day
-              </li>
-            </Link>
-            <Link href='/special-ocassions/christmas'>
-              <li className={liStyles} role='menuitem' onClick={toggleDropdown}>
-                Christmas
-              </li>
-            </Link>
+            {specialOccassions.map((item, index) => (
+              <Link key={index} href={item.link}>
+                <li
+                  className={liStyles}
+                  role='menuitem'
+                  onClick={toggleDropdown}
+                >
+                  {item.name}
+                </li>
+              </Link>
+            ))}
           </ul>
         </div>
       )}
