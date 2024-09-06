@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, labelStyles } from '@/styles/Styles';
 import { MdOutlineBackspace } from 'react-icons/md';
+import TopHeader from '../components/TopHeader';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/visibility-settings`;
@@ -68,18 +69,12 @@ const AdminSettings = () => {
   };
 
   return (
-    <div className='pb-10 bg-pink h-screen'>
-      <a href='/admin-tools' className='absolute left-96 mt-10'>
-        <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
-      </a>
-      <div className='flex items-center justify-center'>
-        <h2 className='text-2xl xl:text-5xl mt-10 font-semibold w-80 xl:w-2/5 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn'>
-          Manage Visibility Settings
-        </h2>
-      </div>
-      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
-        Customize the visibility settings for special occasions
-      </p>
+    <div className='relative p-6 bg-pink'>
+      <TopHeader
+        title='Manage Visibility Settings'
+        headerText='Customize the visibility settings for special occasions'
+      />
+
       <form
         onSubmit={handleSubmit}
         className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'

@@ -5,15 +5,14 @@ import {
   RiEditBoxLine,
   RiFileUploadFill,
 } from 'react-icons/ri';
+import TopHeader from './components/TopHeader';
 
 export default function AdminTools() {
   return (
-    <section className='p-6 h-screen bg-pink'>
-      <div className='flex items-center justify-center'>
-        <h2 className='text-2xl xl:text-5xl mt-10 font-semibold w-80 xl:w-2/5 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn'>
-          Admin Tools
-        </h2>
-      </div>
+    <section className='relative h-screen p-6 bg-pink'>
+      <TopHeader
+        title='Admin Tools'
+      />
       <div className='flex flex-col my-5 border w-96 sm:w-1/3 mx-auto bg-white py-10 rounded-xl shadow-xl animate-slideUp mt-20'>
         <p className='text-base sm:text-3xl text-center mt-5 mb-2 mx-5 sm:mx-20 font-semibold'>
           Manage your website

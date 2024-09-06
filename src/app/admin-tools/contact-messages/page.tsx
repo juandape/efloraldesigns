@@ -6,6 +6,7 @@ import { GetRole, token } from '@/components/GetRole';
 import { MdOutlineBackspace } from 'react-icons/md';
 import { tabsStyles, liStyles } from '@/styles/Styles';
 import Swal from 'sweetalert2';
+import TopHeader from '../components/TopHeader';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/contact-messages`;
@@ -143,18 +144,11 @@ export default function ContactMessages() {
   };
 
   return (
-    <section className='relative p-6 bg-pink'>
-      <a href='/admin-tools' className='absolute left-96 mt-10'>
-        <MdOutlineBackspace className='text-3xl text-blue-sky hover:text-blue-600' />
-      </a>
-      <div className='flex items-center justify-center'>
-        <h2 className='text-2xl xl:text-5xl mt-10 font-semibold w-80 xl:w-2/5 text-center rounded-xl py-4 sm:py-6 bg-gray-200 opacity-80 shadow-sm shadow-gray-400 animate-fadeIn'>
-          Contact Messages
-        </h2>
-      </div>
-      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
-        View all contact messages
-      </p>
+    <div className='relative p-6 bg-pink'>
+      <TopHeader
+        title='Contact Messages'
+        headerText='View all contact messages'
+      />
 
       {/* Filtro de búsqueda */}
       <div className='flex flex-col sm:flex-row justify-center items-center mb-6 gap-4'>
@@ -240,9 +234,7 @@ export default function ContactMessages() {
               key={message._id}
               className='border p-4 mb-4 rounded-lg bg-white shadow-lg'
             >
-              <h3 className='text-lg font-bold'>
-                {message.name}
-              </h3>
+              <h3 className='text-lg font-bold'>{message.name}</h3>
               <p className='text-gray-500'>
                 Date: {formatDate(message.createdAt)}
               </p>
@@ -261,6 +253,6 @@ export default function ContactMessages() {
           <p className='text-center text-gray-500'>No messages found.</p>
         )}
       </div>
-    </section>
+    </div>
   );
 }
