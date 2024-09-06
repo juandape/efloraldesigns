@@ -4,7 +4,7 @@ export default function BreadCrumb({ name }: { name: string }) {
   if (name === 'Admin Tools') {
     return (
       <nav className='flex mt-4 z-[9999]'>
-        <Link href='/' className='hover:underline ml-6 text-xs cursor-pointer'>
+        <Link href='/' className='hover:underline ml-6 text-xs cursor-pointer transition duration-300'>
           Home
         </Link>
         <span className='mx-2 text-xs'>/</span>
@@ -15,13 +15,13 @@ export default function BreadCrumb({ name }: { name: string }) {
 
   return (
     <nav className='flex mt-4 z-[9999]'>
-      <Link href='/' className='hover:underline ml-6 text-xs cursor-pointer'>
+      <Link href='/' className='hover:underline ml-6 text-xs cursor-pointer transition duration-300'>
         Home
       </Link>
       <span className='mx-2 text-xs'>/</span>
       <Link
         href='/admin-tools'
-        className='hover:underline text-xs cursor-pointer'
+        className='hover:underline text-xs cursor-pointer transition duration-300'
       >
         Admin Tools
       </Link>
