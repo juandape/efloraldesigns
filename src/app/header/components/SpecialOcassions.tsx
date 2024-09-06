@@ -48,7 +48,7 @@ const SpecialOcassions: React.FC = () => {
   }
 
   return (
-    <div className='relative inline-block text-left z-50' ref={ref}>
+    <div className='relative inline-block text-left z-[9999]' ref={ref}>
       {settings.showSpecialOccasions && (
         <>
           <div>
@@ -75,7 +75,7 @@ const SpecialOcassions: React.FC = () => {
           </div>
 
           {isOpen && (
-            <div className='origin-top-right absolute pl-6 mt-2 py-4 w-56 rounded-md shadow-lg bg-pink ring-1 ring-black ring-opacity-5 animate-fadeIn'>
+            <div className='origin-top-right absolute pl-6 mt-2 py-4 w-56 rounded-md shadow-lg bg-pink ring-1 ring-black ring-opacity-5 animate-fadeIn z-[9999]'>
               <ul
                 className='py-1'
                 role='menu'
