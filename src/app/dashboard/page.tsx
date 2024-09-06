@@ -51,7 +51,7 @@ export default function Dashboard() {
       {settings.showSpecialOccasions && (
         <section className='mt-10'>
           <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-          <h2 className='text-center text-2xl sm:text-3xl my-10 font-bold'>
+          <h2 className='text-center text-3xl sm:text-4xl my-10 font-bold'>
             Special Occasions
           </h2>
           <hr className='w-80 sm:w-1/2 mx-auto border-3' />
@@ -66,7 +66,7 @@ export default function Dashboard() {
       )}
       <section className='mt-10'>
         <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-        <h2 className='text-center text-2xl sm:text-3xl my-10 font-bold'>
+        <h2 className='text-center text-3xl sm:text-4xl my-10 font-bold'>
           Ocassions
         </h2>
         <hr className='w-80 sm:w-1/2 mx-auto border-3' />
