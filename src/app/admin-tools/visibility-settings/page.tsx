@@ -77,7 +77,7 @@ const AdminSettings = () => {
           Manage Visibility Settings
         </h2>
       </div>
-      <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
+      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
         Customize the visibility settings for special occasions
       </p>
       <form
@@ -91,7 +91,7 @@ const AdminSettings = () => {
             name='showSpecialOccasions'
             checked={settings.showSpecialOccasions}
             onChange={handleChange}
-            className='-mt-2'
+            className='-mt-2 w-4 h-4 transition duration-300'
           />
           <label className={labelStyles}>Show "Special Occasions" tab</label>
         </div>
@@ -103,7 +103,7 @@ const AdminSettings = () => {
               type='checkbox'
               checked={item.visible}
               onChange={() => handleDropdownChange(index)}
-              className='-mt-2'
+              className='-mt-2 w-4 h-4 transition duration-300'
             />
             <label className={labelStyles}>{item.name}</label>
           </div>

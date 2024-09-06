@@ -15,10 +15,10 @@ export default function AdminTools() {
         </h2>
       </div>
       <div className='flex flex-col my-5 border w-96 sm:w-1/3 mx-auto bg-white py-10 rounded-xl shadow-xl animate-slideUp mt-20'>
-        <p className='text-blue-sky text-base sm:text-3xl text-center mt-5 mb-2 mx-5 sm:mx-20 font-semibold'>
+        <p className='text-base sm:text-3xl text-center mt-5 mb-2 mx-5 sm:mx-20 font-semibold'>
           Manage your website
         </p>
-        <hr className='border-blue-sky mb-10 w-60 sm:w-96 mx-auto' />
+        <hr className='mb-10 w-60 sm:w-96 mx-auto' />
         <div className='mx-auto sm:text-xl'>
           <Link
             href='/admin-tools/users'

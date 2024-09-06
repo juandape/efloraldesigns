@@ -152,7 +152,7 @@ export default function ContactMessages() {
           Contact Messages
         </h2>
       </div>
-      <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
+      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
         View all contact messages
       </p>
 
@@ -240,7 +240,7 @@ export default function ContactMessages() {
               key={message._id}
               className='border p-4 mb-4 rounded-lg bg-white shadow-lg'
             >
-              <h3 className='text-lg font-bold text-blue-sky'>
+              <h3 className='text-lg font-bold'>
                 {message.name}
               </h3>
               <p className='text-gray-500'>

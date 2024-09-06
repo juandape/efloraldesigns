@@ -27,7 +27,7 @@ const NextArrow: React.FC<CustomArrowProps> = (props) => {
       className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 right-0 sm:-mr-20 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
-      <MdArrowForwardIos className='text-purple w-6 h-6' />
+      <MdArrowForwardIos className='w-6 h-6' />
       <span className='sr-only'>Next</span>
     </div>
   );
@@ -40,7 +40,7 @@ const PrevArrow: React.FC<CustomArrowProps> = (props) => {
       className={`cursor-pointer hover:shadow hover:rounded-full absolute top-1/2 left-0 sm:-ml-20 pl-2 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10`}
       onClick={onClick}
     >
-      <MdArrowBackIos className='text-purple w-6 h-6' />
+      <MdArrowBackIos className='w-6 h-6' />
       <span className='sr-only'>Previous</span>
     </div>
   );
@@ -137,7 +137,7 @@ const Carousel: React.FC<CarouselProps> = ({
         sliderVisible ? visibleClass : hiddenClass
       }`}
     >
-      <h2 className='text-purple text-xl sm:text-4xl text-center my-10 font-semibold'>
+      <h2 className='text-xl sm:text-3xl text-center my-10 font-semibold'>
         {title}
       </h2>
       {carouselDescription && (
@@ -152,7 +152,7 @@ const Carousel: React.FC<CarouselProps> = ({
               className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl cursor-pointer'
               onClick={() => setSelectedItem(item)}
             />
-            <p className='mt-5 text-lg text-purple'>{item.name}</p>
+            <p className='mt-5 text-lg'>{item.name}</p>
           </div>
         ))}
       </Slider>

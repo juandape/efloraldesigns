@@ -25,7 +25,7 @@ export default function TopHeader({
           {title}
         </h2>
       </div>
-      <p className="text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold">
+      <p className="text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold italic">
         {headerText}
       </p>
     </section>

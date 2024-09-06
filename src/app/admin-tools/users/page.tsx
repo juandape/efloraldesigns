@@ -115,7 +115,7 @@ export default function Users() {
           Registered Users
         </h2>
       </div>
-      <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
+      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
         View and edit all registered users
       </p>
       <div className='flex flex-col my-5 items-start sm:items-center overflow-x-auto'>

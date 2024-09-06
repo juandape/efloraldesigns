@@ -65,10 +65,8 @@ export default function Contact() {
           className='flex flex-col w-96 sm:w-1/3 justify-center mx-auto border rounded-2xl py-6 px-10 shadow-xl'
           onSubmit={handleSubmit}
         >
-          <h2 className='text-2xl font-bold text-center text-blue-sky mb-2'>
-            Contact Us
-          </h2>
-          <hr className='border-blue-sky mb-5' />
+          <h2 className='text-2xl font-bold text-center mb-2'>Contact Us</h2>
+          <hr className=' mb-5' />
           <label htmlFor='name' className={labelStyles}>
             Name
           </label>

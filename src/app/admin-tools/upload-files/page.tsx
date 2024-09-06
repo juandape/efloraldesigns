@@ -12,7 +12,7 @@ export default function UploadFiles() {
           Upload Files
         </h2>
       </div>
-      <p className='text-blue-sky text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
+      <p className='text-base sm:text-3xl text-center my-20 mx-5 sm:mx-20 font-semibold'>
         Upload images and videos to the website
       </p>
         <ImageUpload />

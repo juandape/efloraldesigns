@@ -45,28 +45,16 @@ export default function Dashboard() {
       <TopHeader
         imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034120/efloraldesigns/e2d267e6915cf593b563ad20b2762331.webp'
         imageAlt='Homebanner'
-        title='E Floral Designs'
-        headerText='Your better choice for your special occasions'
+        title='E FLORAL DESIGNS'
+        headerText='Your better choice for any occasions'
       />
-      <section className='mt-10'>
-        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-        <h2 className='text-center text-2xl sm:text-4xl my-10 font-bold'>
-          Ocassions
-        </h2>
-        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-        <Anniversary />
-        <Weddings />
-        <Birthday />
-      </section>
       {settings.showSpecialOccasions && (
         <section className='mt-10'>
           <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-          <h2 className='text-center text-2xl sm:text-4xl my-10 font-bold'>
+          <h2 className='text-center text-2xl sm:text-3xl my-10 font-bold'>
             Special Occasions
           </h2>
           <hr className='w-80 sm:w-1/2 mx-auto border-3' />
-
-          {/* Renderizar condicionalmente cada carrusel */}
           {settings.dropdownItems.find(
             (item) => item.name === "Valentine's Day"
           )?.visible && <Valentine />}
@@ -76,6 +64,16 @@ export default function Dashboard() {
             ?.visible && <Christmas />}
         </section>
       )}
+      <section className='mt-10'>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
+        <h2 className='text-center text-2xl sm:text-3xl my-10 font-bold'>
+          Ocassions
+        </h2>
+        <hr className='w-80 sm:w-1/2 mx-auto border-3' />
+        <Anniversary />
+        <Weddings />
+        <Birthday />
+      </section>
     </div>
   );
 }
