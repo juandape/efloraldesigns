@@ -4,9 +4,21 @@ import HandleOccasion from '@/components/HandleOccasion';
 
 const Weddings = () => {
   const subcategories = {
-    Bouquets: 'Our wedding bouquets are the perfect gift for your loved one.',
-    Decorations:
-      'Our wedding decorations are the perfect touch for your celebration.',
+    Boutonnieres: '',
+    Bouquetes: '',
+    Corsages: '',
+    Ceremony: '',
+    'Runners Arches': '',
+    Huppah: '',
+    Cocktails: '',
+    'Sign in Table': '',
+    'Seatings Assignments': '',
+    'Desserts Table': '',
+    'Cake Table': '',
+    'Bar Arrangements': '',
+    'Ceiling Structures': '',
+    'Sweetheart Table': '',
+    'Guest Tables': '',
   };
 
   return (

@@ -4,9 +4,8 @@ import HandleOccasion from '@/components/HandleOccasion';
 
 const Christmas = () => {
   const subcategories = {
-    Decorations:
-      'Our Christmas decorations are the perfect gift for your loved one.',
-    Gifts: 'Our Christmas gifts are the perfect gift for your loved one.',
+    Florals: '',
+    Wreaths: '',
   };
 
   return (
@@ -22,7 +21,6 @@ const Christmas = () => {
 };
 
 export default Christmas;
-
 
 // 'use client';
 

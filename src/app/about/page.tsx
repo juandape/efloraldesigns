@@ -7,20 +7,25 @@ export default function About() {
         imageSrc='https://res.cloudinary.com/dpvmwsbq8/image/upload/v1725034144/efloraldesigns/d3d3836b507ea90e0b716a52780d9c59.webp'
         imageAlt='About Us'
         title='About Us'
-        headerText='We are a floral design company that specializes in creating unique and
-        beautiful arrangements for all occasions. Our team of talented florists
-        work hard to bring your vision to life and create stunning bouquets that
-        will make your special day even more memorable.'
+        headerText=''
       />
       <section className='mb-20'>
-        <p className='text-center text-lg sm:text-2xl font-semibold my-10 mx-5 sm:mx-20'>
-          At E Floral Designs, we believe that flowers are an essential part of
-          any celebration. Whether you are planning a wedding, birthday party,
-          or anniversary celebration, our team of expert florists will work with
-          you to create the perfect arrangement for your special day. We take
-          pride in our attention to detail and our commitment to providing
-          exceptional customer service. Let us help you make your event
-          unforgettable with our stunning floral designs.
+        <p className='text-justify text-lg sm:text-2xl font-semibold my-10 mx-5 sm:mx-20'>
+          Eudely our design director, has led our team with her talent and years
+          of experience in the world of floral designs. Her ability to create
+          completely unique and creative floral designs sets her apart in the
+          design field.
+        </p>
+        <p className='text-justify text-lg sm:text-2xl font-semibold my-10 mx-5 sm:mx-20'>
+          Eudely is known for her innovative approach and her capacity to
+          transform flowers into true works of art.
+        </p>
+        <p className='text-justify text-lg sm:text-2xl font-semibold my-10 mx-5 sm:mx-20'>
+          Eudely will design and create your florals for your special occasion,
+          always striving to translate your floral ideas into exquisite floral
+          designs. Her designs will not only enhance but bring life to the
+          surroundings where they are used. Always using the best and freshest
+          flowers to make your occasion more special.
         </p>
       </section>
     </>
