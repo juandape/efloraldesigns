@@ -21,7 +21,7 @@ export default function ImageUpload() {
   const [form, setForm] = useState(InitialForm);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false); // Estado para controlar el estado de la carga
+  const [isUploading, setIsUploading] = useState(false);
   const role = GetRole();
 
   const handleUpload = (e: { target: { name: string; files: FileList } }) => {
@@ -37,7 +37,7 @@ export default function ImageUpload() {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    setIsUploading(true); // Deshabilitar el botón cuando se inicia la carga
+    setIsUploading(true);
 
     const formData = new FormData();
 
@@ -127,7 +127,7 @@ export default function ImageUpload() {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col w-96 sm:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'
+      className='flex flex-col w-96 xl:w-1/3 border mx-auto p-10 bg-white rounded-lg shadow-lg mb-10'
     >
       <label className={labelStyles}>Select images</label>
       <input
@@ -146,7 +146,7 @@ export default function ImageUpload() {
         onChange={handleChange}
         className={inputStyles}
       />
-      <label className={labelStyles}>Select videos</label>
+      <label className={labelStyles}>Select videos ( Up to 300 mb )</label>
       <input
         type='file'
         name='video'
