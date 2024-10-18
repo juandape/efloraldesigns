@@ -17,11 +17,11 @@ const InitialForm = {
   ocassion: '',
 };
 
-export default function
-  ImageUpload() {
+export default function ImageUpload() {
   const [form, setForm] = useState(InitialForm);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
+  const [isUploading, setIsUploading] = useState(false); // Estado para controlar el estado de la carga
   const role = GetRole();
 
   const handleUpload = (e: { target: { name: string; files: FileList } }) => {
@@ -36,6 +36,8 @@ export default function
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    setIsUploading(true); // Deshabilitar el botón cuando se inicia la carga
 
     const formData = new FormData();
 
@@ -53,6 +55,7 @@ export default function
           title: 'You are not authorized to upload files',
           icon: 'error',
         });
+        setIsUploading(false); // Habilitar el botón si no está autorizado
         return;
       }
 
@@ -102,6 +105,8 @@ export default function
         title: 'An error occurred',
         icon: 'error',
       });
+    } finally {
+      setIsUploading(false); // Habilitar el botón cuando finaliza la carga
     }
   };
 
@@ -175,8 +180,8 @@ export default function
         <option value='mothers'>Mother's Day</option>
         <option value='christmas'>Christmas</option>
       </select>
-      <button type='submit' className={buttonStyles}>
-        Upload
+      <button type='submit' className={buttonStyles} disabled={isUploading}>
+        {isUploading ? 'Uploading...' : 'Upload'}
       </button>
     </form>
   );
