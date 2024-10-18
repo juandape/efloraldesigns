@@ -155,7 +155,7 @@ export default function MediaManager() {
       );
 
       setEditingMediaId(null);
-      setUpdatedImageName(''); // Reset input field
+      setUpdatedImageName('');
       setUpdatedVideoName('');
       setUpdatedOcassion('');
       setUpdatedPosition(1);
@@ -233,11 +233,11 @@ export default function MediaManager() {
             key={media._id}
             className='media-item border p-4 rounded-lg shadow-lg'
           >
-            {media.type === 'video' ? (
+            {media.videoName ? (
               <video
                 src={media.video}
                 controls
-                className='w-full h-auto mb-3'
+                className='w-80 mx-auto mb-3'
               ></video>
             ) : (
               <img
