@@ -1,13 +1,10 @@
 'use client';
 
 import HandleOccasion from '@/components/HandleOccasion';
+import { anniversarySubcategories } from '@/components/subcategories';
+
 
 const Anniversary = () => {
-  const subcategories = {
-    Bouquets:
-      'Our anniversary bouquetes are the perfect gift for your loved one.',
-    Gifts: 'Our anniversary gifts are the perfect gift for your loved one.',
-  };
 
   return (
     <HandleOccasion
@@ -16,7 +13,7 @@ const Anniversary = () => {
       headerImageAlt='Anniversary'
       headerTitle='Anniversary'
       headerText='Celebrate your anniversary with our beautiful flowers'
-      subcategories={subcategories}
+      subcategories={anniversarySubcategories}
     />
   );
 };

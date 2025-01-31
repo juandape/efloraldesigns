@@ -13,7 +13,7 @@ interface FlowerCarouselProps {
 const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
   occasion,
   title,
-  limit = 4,
+  limit = 20,
 }) => {
   const { flowers, error } = useFetchFlowersByOccasion(occasion);
 

@@ -1,26 +1,9 @@
 'use client';
 
 import HandleOccasion from '@/components/HandleOccasion';
+import { WeddingSubcategories } from '@/components/subcategories';
 
 const Weddings = () => {
-  const subcategories = {
-    Boutonnieres: '',
-    Bouquetes: '',
-    Corsages: '',
-    Ceremony: '',
-    'Runners Arches': '',
-    Huppah: '',
-    Cocktails: '',
-    'Sign in Table': '',
-    'Seatings Assignments': '',
-    'Desserts Table': '',
-    'Cake Table': '',
-    'Bar Arrangements': '',
-    'Ceiling Structures': '',
-    'Sweetheart Table': '',
-    'Guest Tables': '',
-  };
-
   return (
     <HandleOccasion
       occasion='weddings'
@@ -28,7 +11,7 @@ const Weddings = () => {
       headerImageAlt='Weddings'
       headerTitle='Weddings'
       headerText='We have the perfect flowers for your special day'
-      subcategories={subcategories}
+      subcategories={WeddingSubcategories}
     />
   );
 };

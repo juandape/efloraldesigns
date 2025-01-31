@@ -5,6 +5,14 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
+import {
+  weddingSubcategories,
+  anniversarySubcategories,
+  birthdaySubcategories,
+  christmasSubcategories,
+  valentinesSubcategories,
+  mothersSubcategories,
+} from '@/components/subcategories';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -36,12 +44,12 @@ export default function MediaManager() {
   const role = GetRole();
 
   const occasionSubcategories: { [key: string]: string[] } = {
-    anniversary: ['Bouquets', 'Gifts'],
-    birthday: ['Party Supplies', 'Gifts'],
-    weddings: ['Bouquets', 'Decorations'],
-    valentines: ['Roses', 'Chocolates'],
-    christmas: ['Decorations', 'Gifts'],
-    mothers: ['Flowers', 'Gifts'],
+    anniversary: Object.keys(anniversarySubcategories),
+    birthday: Object.keys(birthdaySubcategories),
+    weddings: Object.keys(weddingSubcategories),
+    valentines: Object.keys(valentinesSubcategories),
+    christmas: Object.keys(christmasSubcategories),
+    mothers: Object.keys(mothersSubcategories),
   };
 
   useEffect(() => {
@@ -285,7 +293,7 @@ export default function MediaManager() {
                   <label className={labelStyles}>Edit Name</label>
                   <input
                     type='text'
-                    name={'imageName' || 'videoName'}
+                    name={media.type === 'image' ? 'imageName' : 'videoName'}
                     value={updatedImageName || updatedVideoName}
                     onChange={handleChange}
                     className={inputStyles}

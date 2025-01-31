@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
+import {useRouter} from 'next/navigation';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -23,6 +24,7 @@ export default function ImageUpload() {
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const role = GetRole();
+  const navigation = useRouter();
 
   const handleUpload = (e: { target: { name: string; files: FileList } }) => {
     const { name, files } = e.target;
@@ -97,7 +99,7 @@ export default function ImageUpload() {
           title: 'Files uploaded successfully',
           icon: 'success',
         }).then(() => {
-          window.location.reload();
+          navigation.refresh();
         });
       }
     } catch (error) {

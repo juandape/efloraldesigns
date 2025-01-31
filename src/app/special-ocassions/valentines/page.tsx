@@ -1,14 +1,9 @@
 'use client';
 
 import HandleOccasion from '@/components/HandleOccasion';
+import { valentinesSubcategories } from '@/components/subcategories';
 
 const Valentines = () => {
-  const subcategories = {
-    Roses: 'Our Valentines roses are the perfect gift for your loved one.',
-    Chocolates:
-      'Our Valentines chocolates are the perfect gift for your loved one.',
-  };
-
   return (
     <HandleOccasion
       occasion='valentines'
@@ -16,7 +11,7 @@ const Valentines = () => {
       headerImageAlt="Valentine's Day"
       headerTitle="Valentine's Day"
       headerText='Celebrate your Valentines with our beautiful flowers'
-      subcategories={subcategories}
+      subcategories={valentinesSubcategories}
     />
   );
 };
