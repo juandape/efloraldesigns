@@ -1,7 +1,7 @@
 'use client';
 
 import HandleOccasion from '@/components/HandleOccasion';
-import { WeddingSubcategories } from '@/components/subcategories';
+import { weddingSubcategories } from '@/components/subcategories';
 
 const Weddings = () => {
   return (
@@ -11,7 +11,7 @@ const Weddings = () => {
       headerImageAlt='Weddings'
       headerTitle='Weddings'
       headerText='We have the perfect flowers for your special day'
-      subcategories={WeddingSubcategories}
+      subcategories={weddingSubcategories}
     />
   );
 };

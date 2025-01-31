@@ -30,7 +30,7 @@ const HandleOccasion: React.FC<HandleOccasionProps> = ({
   headerImageAlt,
   headerTitle,
   headerText,
-  subcategories,
+  subcategories = {},
 }) => {
   const { flowers, error } = useFetchFlowersByOccasion(occasion);
 
