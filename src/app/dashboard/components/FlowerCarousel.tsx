@@ -3,17 +3,18 @@
 import React, { useEffect } from 'react';
 import Carousel from '@/components/Carousel';
 import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
-
 interface FlowerCarouselProps {
   occasion: string;
   title: string;
   limit?: number;
+  link: string;
 }
 
 const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
   occasion,
   title,
   limit = 20,
+  link
 }) => {
   const { flowers, error } = useFetchFlowersByOccasion(occasion);
 
@@ -41,6 +42,7 @@ const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
       visibleClass='animate-slide-right'
       hiddenClass='block'
       limit={limit}
+      link={`/${link}`}
     />
   );
 };

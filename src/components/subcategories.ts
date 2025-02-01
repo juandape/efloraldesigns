@@ -41,4 +41,5 @@ export const valentinesSubcategories = {
   Roses: 'Our Valentines roses are the perfect gift for your loved one.',
   Chocolates:
     'Our Valentines chocolates are the perfect gift for your loved one.',
+  
 };

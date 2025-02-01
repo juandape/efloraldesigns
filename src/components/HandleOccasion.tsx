@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import TopHeader from '@/components/TopHeader';
 import Carousel from '@/components/Carousel';
 import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
+import { title } from 'process';
 
 interface Flower {
   _id: string;
@@ -80,6 +81,7 @@ const HandleOccasion: React.FC<HandleOccasionProps> = ({
               visibleClass='animate-slide-right'
               hiddenClass='block'
               limit={30}
+              link={Object.keys(subcategories).length > 1 ? '' : `/${occasion}`}
             />
           );
         })}

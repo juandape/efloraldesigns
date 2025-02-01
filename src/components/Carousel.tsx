@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import ImageModal from '@/components/ImageModal';
+import Link from 'next/link';
 
 interface Item {
   name: string;
@@ -18,6 +19,7 @@ interface CarouselProps {
   visibleClass: string;
   hiddenClass: string;
   limit?: number;
+  link: string;
 }
 
 const NextArrow: React.FC<CustomArrowProps> = (props) => {
@@ -83,6 +85,7 @@ const Carousel: React.FC<CarouselProps> = ({
   visibleClass,
   hiddenClass,
   limit,
+  link
 }) => {
   const sliderVisible = useScrollAnimation(elementId);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -137,11 +140,13 @@ const Carousel: React.FC<CarouselProps> = ({
         sliderVisible ? visibleClass : hiddenClass
       }`}
     >
-      <h2 className='text-xl sm:text-3xl text-center my-10 font-semibold'>
-        {title}
+      <h2 className='text-xl sm:text-3xl text-center my-10 font-semibold hover:text-pink'>
+        <Link href={link}>{title}</Link>
       </h2>
       {carouselDescription && (
-        <p className='text-lg text-center mb-10 font-semibold'>{carouselDescription}</p>
+        <p className='text-lg text-center mb-10 font-semibold'>
+          {carouselDescription}
+        </p>
       )}
       <Slider {...settings}>
         {displayedItems.map((item, index) => (
