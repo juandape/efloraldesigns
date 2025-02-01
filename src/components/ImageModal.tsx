@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 interface ImageModalProps {
   item: {
     name: string;
-    image: string;
+    image?: string;
+    video?: string;
     description?: string;
   };
   onClose: () => void;
@@ -17,7 +18,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ item, onClose }) => {
         <img
           src={item.image}
           alt={item.name}
-          className='w-[700px] h-[700px] object-cover px-5'
+          className='w-[700px] h-[700px] object-cover px-5 mx-auto'
         />
         <h2 className='text-white text-xl font-bold mt-5 text-center'>
           {item.name}
