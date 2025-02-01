@@ -17,7 +17,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ item, onClose }) => {
         <img
           src={item.image}
           alt={item.name}
-          className='w-[700px] h-auto object-cover px-5'
+          className='w-[700px] h-[700px] object-cover px-5'
         />
         <h2 className='text-white text-xl font-bold mt-5 text-center'>
           {item.name}
