@@ -1,5 +1,4 @@
 import ImageEdit from '@/components/ImageEdit';
-import { MdOutlineBackspace } from 'react-icons/md';
 import TopHeader from '../components/TopHeader';
 
 export default function EditFiles() {

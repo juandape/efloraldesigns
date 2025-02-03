@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import TopHeader from '@/components/TopHeader';
 import Carousel from '@/components/Carousel';
 import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
-import { title } from 'process';
 
 interface Flower {
   _id: string;
