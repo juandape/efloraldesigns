@@ -167,8 +167,8 @@ export default function SubCategories() {
           occasion: selectedOccasion,
           subCategories: [
             {
-              name: newSubcategoryName.trim(),
-              description: newSubcategoryDescription?.trim() || '',
+              name: newSubcategoryName,
+              description: newSubcategoryDescription,
             },
           ],
         },
