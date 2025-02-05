@@ -127,25 +127,36 @@ export default function SubCategories() {
 
   const handleDeleteSubcategory = async (index: number) => {
     const subcategoryToDelete = subCategories[index];
+    const selectedOccasionObj = occasions.find(
+      (o) => o.occasion === selectedOccasion || o.title === selectedOccasion
+    );
+
+    if (!selectedOccasionObj?._id) {
+      setMessage('Invalid occasion ID.');
+      return;
+    }
 
     if (!subcategoryToDelete._id) {
-      setSubCategories(subCategories.filter((_, i) => i !== index));
+      setMessage('Invalid subcategory ID.');
       return;
     }
 
     try {
-      await axios.delete(
-        `${url}/${selectedOccasion}/${subcategoryToDelete._id}`,
-        {
-          headers: { Authorization: `Bearer ${token}`, 'X-User-Role': role },
-        }
-      );
+      const urlToDelete = `${url}/${selectedOccasionObj._id}/${subcategoryToDelete._id}`;
 
-      setSubCategories(subCategories.filter((_, i) => i !== index));
+      await axios.delete(urlToDelete, {
+        headers: { Authorization: `Bearer ${token}`, 'X-User-Role': role },
+      });
+
       setMessage('Subcategory deleted successfully');
-    } catch (error) {
+
+      // Eliminar la subcategoría de la lista de subcategorías
+      setSubCategories((prevSubCategories) =>
+        prevSubCategories.filter((_, i) => i !== index)
+      );
+    } catch (error: any) {
       console.error('Error deleting subcategory:', error);
-      setMessage('Error deleting subcategory');
+      setMessage(error.response?.data?.message || 'Error deleting subcategory');
     }
   };
 
