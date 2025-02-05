@@ -164,11 +164,11 @@ export default function SubCategories() {
       const response = await axios.post(
         url,
         {
-          ocassion: selectedOccasion,
+          occasion: selectedOccasion,
           subCategories: [
             {
-              name: newSubcategoryName,
-              description: newSubcategoryDescription,
+              name: newSubcategoryName.trim(),
+              description: newSubcategoryDescription?.trim() || '',
             },
           ],
         },
