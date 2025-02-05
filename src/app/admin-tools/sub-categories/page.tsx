@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, labelStyles } from '@/styles/Styles';
+import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/sub-categories`;
@@ -20,8 +21,6 @@ export default function SubCategories() {
   const [newSubcategoryName, setNewSubcategoryName] = useState('');
   const [newSubcategoryDescription, setNewSubcategoryDescription] =
     useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +34,11 @@ export default function SubCategories() {
         } else {
           setOccasions([]);
         }
-      } catch (error: any) {
-        setMessage(
-          error.response?.data?.message || 'Error fetching subcategories'
-        );
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching subcategories',
+        })
         setOccasions([]);
       }
     };
@@ -77,30 +77,33 @@ export default function SubCategories() {
   const handleEditSubcategory = async (index: number) => {
     const subcategoryToUpdate = subCategories[index];
 
-    console.log('selectedOccasion:', selectedOccasion);
-    console.log('occasions:', occasions);
-
     // Buscar el _id correcto de la ocasión
     const selectedOccasionObj = occasions.find(
       (o) => o.occasion === selectedOccasion || o.title === selectedOccasion
     );
 
-    console.log('selectedOccasionObj:', selectedOccasionObj);
-
     if (!selectedOccasionObj?._id) {
-      setMessage('Invalid occasion ID.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid occasion ID',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
     if (!subcategoryToUpdate._id) {
-      setMessage('Invalid subcategory ID.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid subcategory ID',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
     try {
       const urlToUpdate = `${url}/${selectedOccasionObj._id}/${subcategoryToUpdate._id}`;
-
-      console.log('Updating subcategory:', { url: urlToUpdate });
 
       await axios.patch(
         urlToUpdate,
@@ -118,10 +121,25 @@ export default function SubCategories() {
         }
       );
 
-      setMessage('Subcategory updated successfully');
-    } catch (error: any) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Subcategory updated successfully',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // Actualizar la subcategoría en la lista de subcategorías
+      setSubCategories((prevSubCategories) => {
+        const updatedSubCategories = [...prevSubCategories];
+        updatedSubCategories[index] = subcategoryToUpdate;
+        return updatedSubCategories;
+      });
+    } catch (error: unknown | Error) {
       console.error('Error updating subcategory:', error);
-      setMessage(error.response?.data?.message || 'Error updating subcategory');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error updating subcategory',
+      });
     }
   };
 
@@ -132,13 +150,39 @@ export default function SubCategories() {
     );
 
     if (!selectedOccasionObj?._id) {
-      setMessage('Invalid occasion ID.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid occasion ID',
+        text: 'Please select a valid occasion.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
-    if (!subcategoryToDelete._id) {
-      setMessage('Invalid subcategory ID.');
+    if (!subcategoryToDelete?._id) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid subcategory ID',
+        text: 'The selected subcategory is not valid.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
+    }
+
+    // 🔴 Mover la confirmación antes de hacer la petición
+    const result = await Swal.fire({
+      title: 'Are you sure you want to delete this subcategory?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    });
+
+    if (!result.isConfirmed) {
+      return; // Si el usuario cancela, no hacer nada
     }
 
     try {
@@ -148,26 +192,45 @@ export default function SubCategories() {
         headers: { Authorization: `Bearer ${token}`, 'X-User-Role': role },
       });
 
-      setMessage('Subcategory deleted successfully');
-
-      // Eliminar la subcategoría de la lista de subcategorías
+      // 🔵 Solo mostrar mensaje de éxito si la eliminación fue exitosa
       setSubCategories((prevSubCategories) =>
         prevSubCategories.filter((_, i) => i !== index)
       );
-    } catch (error: any) {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Subcategory deleted successfully',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
       console.error('Error deleting subcategory:', error);
-      setMessage(error.response?.data?.message || 'Error deleting subcategory');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error deleting subcategory',
+        text: 'An error occurred while trying to delete the subcategory. Please try again later.',
+      });
     }
   };
 
   const handleAddSubcategory = async () => {
     if (!selectedOccasion) {
-      setMessage('Please select an occasion first.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Please select an occasion',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
     if (!newSubcategoryName.trim()) {
-      setMessage('Subcategory name is required.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Please enter a subcategory name',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
@@ -198,10 +261,19 @@ export default function SubCategories() {
       // Limpiar campos
       setNewSubcategoryName('');
       setNewSubcategoryDescription('');
-      setMessage('Subcategory added successfully.');
+      Swal.fire({
+        icon: 'success',
+        title: 'Subcategory added successfully',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      window.location.reload();
     } catch (error) {
       console.error('Error adding subcategory:', error);
-      setMessage('Error adding subcategory.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error adding subcategory',
+      });
     }
   };
 
@@ -292,7 +364,6 @@ export default function SubCategories() {
               ))}
             </>
           )}
-          {message && <p className='text-center text-green-600'>{message}</p>}
         </form>
       )}
 
