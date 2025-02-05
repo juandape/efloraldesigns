@@ -50,7 +50,7 @@ export default function SubCategories() {
     if (selectedOccasion) {
       // Filtrar todas las coincidencias de la ocasión seleccionada
       const filteredSubCategories = occasions
-        .filter((o) => o.ocassion === selectedOccasion)
+        .filter((o) => o.occasion === selectedOccasion)
         .flatMap((o) => o.subCategories); // Aplanar el array
 
       setSubCategories(filteredSubCategories);
@@ -82,7 +82,7 @@ export default function SubCategories() {
 
     // Buscar el _id correcto de la ocasión
     const selectedOccasionObj = occasions.find(
-      (o) => o.ocassion === selectedOccasion || o.title === selectedOccasion
+      (o) => o.occasion === selectedOccasion || o.title === selectedOccasion
     );
 
     console.log('selectedOccasionObj:', selectedOccasionObj);
