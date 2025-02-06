@@ -1,5 +1,4 @@
 import ImageUpload from '@/components/ImageUpload';
-import { MdOutlineBackspace } from 'react-icons/md';
 import TopHeader from '../components/TopHeader';
 
 export default function UploadFiles() {
