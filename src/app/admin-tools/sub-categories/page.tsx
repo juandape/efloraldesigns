@@ -6,6 +6,7 @@ import axios from 'axios';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, labelStyles } from '@/styles/Styles';
 import Swal from 'sweetalert2';
+import Modal from '@/components/Modal';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/sub-categories`;
@@ -21,6 +22,7 @@ export default function SubCategories() {
   const [newSubcategoryName, setNewSubcategoryName] = useState('');
   const [newSubcategoryDescription, setNewSubcategoryDescription] =
     useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +40,7 @@ export default function SubCategories() {
         Swal.fire({
           icon: 'error',
           title: 'Error fetching subcategories',
-        })
+        });
         setOccasions([]);
       }
     };
@@ -261,11 +263,12 @@ export default function SubCategories() {
       // Limpiar campos
       setNewSubcategoryName('');
       setNewSubcategoryDescription('');
+      setModalOpen(false);
       Swal.fire({
         icon: 'success',
         title: 'Subcategory added successfully',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 3500,
       });
       window.location.reload();
     } catch (error) {
@@ -289,7 +292,7 @@ export default function SubCategories() {
           You do not have permission to manage subcategories.
         </p>
       ) : (
-        <form className='mt-6 space-y-4 bg-white p-4 rounded-lg shadow-md'>
+        <form className='mt-6 space-y-4 bg-white p-4 rounded-lg shadow-md w-96 mx-auto'>
           <div>
             <label className={labelStyles}>Occasion Name</label>
             <select
@@ -309,7 +312,16 @@ export default function SubCategories() {
               <option value='mothers'>Mother's Day</option>
             </select>
           </div>
-
+          <button
+            className={buttonStyles}
+            onClick={(e) => {
+              e.preventDefault();
+              setModalOpen(true);
+            }}
+          >
+            Add New Subcategory
+          </button>
+            <hr />
           {selectedOccasion && (
             <>
               <h3 className='text-lg font-semibold mt-4'>
@@ -348,14 +360,14 @@ export default function SubCategories() {
                     <button
                       type='button'
                       onClick={() => handleEditSubcategory(index)}
-                      className='bg-blue-500 text-white px-3 py-1 rounded-md'
+                      className={`${buttonStyles} bg-green-500 my-4`}
                     >
-                      Save Changes
+                      Save changes
                     </button>
                     <button
                       type='button'
                       onClick={() => handleDeleteSubcategory(index)}
-                      className='bg-red-500 text-white px-3 py-1 rounded-md'
+                      className={`${buttonStyles} bg-red-500 my-4`}
                     >
                       Delete Subcategory
                     </button>
@@ -366,10 +378,8 @@ export default function SubCategories() {
           )}
         </form>
       )}
-
-      <div className='mt-6 p-4 bg-gray-100 rounded-lg'>
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <h3 className='text-lg font-semibold'>Add a New Subcategory</h3>
-
         <label className={labelStyles}>Subcategory Name</label>
         <input
           type='text'
@@ -378,22 +388,19 @@ export default function SubCategories() {
           className='w-full p-2 border rounded-md'
           required
         />
-
         <label className={labelStyles}>Description (Optional)</label>
         <textarea
           value={newSubcategoryDescription}
           onChange={(e) => setNewSubcategoryDescription(e.target.value)}
           className='w-full p-2 border rounded-md'
         />
-
         <button
-          type='button'
-          onClick={handleAddSubcategory}
           className='mt-3 bg-green-500 text-white px-3 py-2 rounded-md'
+          onClick={handleAddSubcategory}
         >
           Add Subcategory
         </button>
-      </div>
+      </Modal>
     </div>
   );
 }
