@@ -3,13 +3,13 @@
 import { useEffect } from 'react';
 import TopHeader from '@/components/TopHeader';
 import Carousel from '@/components/Carousel';
-import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
+import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOccasion';
 
 interface Flower {
   _id: string;
   imageName: string;
   image: string;
-  ocassion: string;
+  occasion: string;
   subcategory: string;
   position?: number;
   description?: string;
@@ -46,7 +46,7 @@ const HandleOccasion: React.FC<HandleOccasionProps> = ({
         _id: flower._id || '',
         name: flower.imageName,
         image: flower.image,
-        ocassion: flower.ocassion,
+        occasion: flower.occasion,
         subcategory: flower.subcategory,
         position: flower.position || 1,
         description: flower.description,

@@ -7,7 +7,7 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/visibility-settings`;
 
-const SpecialOcassions: React.FC = () => {
+const SpecialOccasions: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState<{
     dropdownItems: { name: string; link: string; visible: boolean }[];
@@ -42,7 +42,7 @@ const SpecialOcassions: React.FC = () => {
   if (!settings) {
     return (
       <div className='mt-3'>
-        <AiOutlineLoading3Quarters className='animate-spin text-blue-sky'/>
+        <AiOutlineLoading3Quarters className='animate-spin text-blue-sky' />
       </div>
     );
   }
@@ -108,4 +108,4 @@ const SpecialOcassions: React.FC = () => {
   );
 };
 
-export default SpecialOcassions;
+export default SpecialOccasions;

@@ -16,7 +16,6 @@ interface MediaItem {
   imageName?: string;
   video?: string;
   videoName?: string;
-  ocassion?: string;
   occasion?: string;
   subcategory?: string;
   position?: number;
@@ -28,7 +27,7 @@ export default function MediaManager() {
   const [editingMediaId, setEditingMediaId] = useState<string | null>(null);
   const [updatedImageName, setUpdatedImageName] = useState<string>('');
   const [updatedVideoName, setUpdatedVideoName] = useState<string>('');
-  const [updatedOcassion, setUpdatedOcassion] = useState<string>('');
+  const [updatedOccasion, setUpdatedOccasion] = useState<string>('');
   const [updatedPosition, setUpdatedPosition] = useState<number>(1);
   const [updatedDescription, setUpdatedDescription] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -96,7 +95,7 @@ export default function MediaManager() {
         const normalizedItems = response.data.flowers.map(
           (item: MediaItem) => ({
             ...item,
-            occasion: item.occasion || item.ocassion, // Normalización aquí
+            occasion: item.occasion || item.occasion, // Normalización aquí
           })
         );
 
@@ -116,8 +115,8 @@ export default function MediaManager() {
     setEditingMediaId(media._id);
     setUpdatedImageName(media.imageName || '');
     setUpdatedVideoName(media.videoName || '');
-    setSelectedOccasion(media.ocassion || '');
-    setUpdatedOcassion(media.ocassion || '');
+    setSelectedOccasion(media.occasion || '');
+    setUpdatedOccasion(media.occasion || '');
     setUpdatedPosition(media.position || 1);
     setUpdatedDescription(media.description || '');
     setUpdatedSubcategory(media.subcategory || '');
@@ -173,7 +172,7 @@ export default function MediaManager() {
     const FormData = {
       imageName: updatedImageName,
       videoName: updatedVideoName,
-      ocassion: updatedOcassion || selectedOccasion,
+      occasion: updatedOccasion || selectedOccasion,
       subcategory: updatedSubcategory,
       position: updatedPosition,
       description: updatedDescription,
@@ -194,7 +193,7 @@ export default function MediaManager() {
                 ...item,
                 imageName: updatedImageName,
                 videoName: updatedVideoName,
-                ocassion: updatedOcassion,
+                occasion: updatedOccasion,
                 subcategory: updatedSubcategory,
                 position: updatedPosition,
                 description: updatedDescription,
@@ -206,7 +205,7 @@ export default function MediaManager() {
       setEditingMediaId(null);
       setUpdatedImageName('');
       setUpdatedVideoName('');
-      setUpdatedOcassion('');
+      setUpdatedOccasion('');
       setUpdatedPosition(1);
       setUpdatedDescription('');
       setUpdatedSubcategory('');
@@ -229,7 +228,7 @@ export default function MediaManager() {
     >
   ) => {
     const { name, value } = e.target;
-    if (name === 'ocassion') {
+    if (name === 'occasion') {
       setSelectedOccasion(value);
       setUpdatedSubcategory(''); // Reset subcategory when occasion changes
     } else if (name === 'subcategory') {
@@ -253,7 +252,9 @@ export default function MediaManager() {
     (media) =>
       media.imageName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       media.videoName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (media.occasion || media.ocassion)?.toLowerCase().includes(searchTerm.toLowerCase())
+      (media.occasion || media.occasion)
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -292,7 +293,7 @@ export default function MediaManager() {
                 {media.imageName || media.videoName}
               </h3>
               <h3 className='mb-2'>
-                <span className='font-bold'>Occasion:</span> {media.ocassion}
+                <span className='font-bold'>Occasion:</span> {media.occasion}
               </h3>
               <h3 className='mb-5'>
                 <span className='font-bold'>Subcategory:</span>{' '}
@@ -324,7 +325,7 @@ export default function MediaManager() {
                 <div className='flex flex-col mx-5 sm:mx-10'>
                   <label className={labelStyles}>Occasion</label>
                   <select
-                    name='ocassion'
+                    name='occasion'
                     value={selectedOccasion}
                     onChange={handleChange}
                     className={inputStyles}

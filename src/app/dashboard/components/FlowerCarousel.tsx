@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Carousel from '@/components/Carousel';
-import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOcassion';
+import { useFetchFlowersByOccasion } from '@/components/useFetchFlowersByOccasion';
 interface FlowerCarouselProps {
   occasion: string;
   title: string;
@@ -14,7 +14,7 @@ const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
   occasion,
   title,
   limit = 20,
-  link
+  link,
 }) => {
   const { flowers, error } = useFetchFlowersByOccasion(occasion);
 
@@ -28,7 +28,7 @@ const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
     .map((flower) => ({
       name: flower.imageName,
       image: flower.image,
-      occasion: flower.ocassion,
+      occasion: flower.occasion,
       position: flower.position || 1,
       description: flower.description,
     }))

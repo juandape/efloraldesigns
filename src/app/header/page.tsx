@@ -4,13 +4,13 @@ import { IoPersonCircleOutline, IoMenu, IoClose } from 'react-icons/io5';
 import Link from 'next/link';
 import logo from '@/images/logo.png';
 import Img from 'next/image';
-import Ocassions from './components/Ocassions';
+import Occasions from './components/Occasions';
 import { useState, useEffect, useRef } from 'react';
 import { tabsStyles } from '@/styles/Styles';
 import Login from '@/components/Login';
 import { GetRole, token } from '@/components/GetRole';
 import SigninUser from '@/components/SigninUser';
-import SpecialOcassions from './components/SpecialOcassions';
+import SpecialOccasions from './components/SpecialOccasions';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,8 +58,8 @@ export default function Header() {
         <Img src={logo} alt='Logo' className='w-20' />
       </Link>
       <nav className='hidden md:flex items-center gap-10 mr-20'>
-        <SpecialOcassions />
-        <Ocassions />
+        <SpecialOccasions />
+        <Occasions />
         <Link href='/about' className={tabsStyles}>
           About
         </Link>
@@ -88,8 +88,8 @@ export default function Header() {
           ref={menuRef}
           className='flex flex-col pl-10 absolute top-20 left-0 w-full bg-pink p-4 md:hidden z-50 animate-fadeIn'
         >
-          <SpecialOcassions />
-          <Ocassions />
+          <SpecialOccasions />
+          <Occasions />
           <Link
             href='/about'
             className={`${tabsStyles} my-2`}

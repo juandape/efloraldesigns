@@ -2,7 +2,7 @@ import { tabsStyles, liStyles } from '@/styles/Styles';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
-const Ocassions: React.FC = () => {
+const Occasions: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -21,10 +21,10 @@ const Ocassions: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const Occassions = [
-    { name: 'Anniversary', link: '/ocassions/anniversary' },
-    { name: 'Birthday', link: '/ocassions/birthday' },
-    { name: 'Weddings', link: '/ocassions/weddings' },
+  const Occcasions = [
+    { name: 'Anniversary', link: '/occasions/anniversary' },
+    { name: 'Birthday', link: '/occasions/birthday' },
+    { name: 'Weddings', link: '/occasions/weddings' },
   ];
 
   return (
@@ -60,16 +60,16 @@ const Ocassions: React.FC = () => {
             aria-orientation='vertical'
             aria-labelledby='options-menu'
           >
-            {Occassions.map((item, index) => (
+            {Occcasions.map((item, index) => (
               <Link key={index} href={item.link}>
-              <li
-                className={liStyles}
-                role='menuitem'
-                onClick={toggleDropdown}
-              >
-                {item.name}
-              </li>
-            </Link>
+                <li
+                  className={liStyles}
+                  role='menuitem'
+                  onClick={toggleDropdown}
+                >
+                  {item.name}
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
@@ -78,4 +78,4 @@ const Ocassions: React.FC = () => {
   );
 };
 
-export default Ocassions;
+export default Occasions;

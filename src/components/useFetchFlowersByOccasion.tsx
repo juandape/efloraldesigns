@@ -8,7 +8,7 @@ const url = `${BASE_URL}/api/flowers`;
 
 interface Flower {
   imageName: string;
-  ocassion: string;
+  occasion: string;
   subcategory: string;
   image: string;
   position?: number;
@@ -24,7 +24,7 @@ export const useFetchFlowersByOccasion = (occasion: string) => {
       try {
         const response = await axios.get(url);
         const filteredFlowers = response.data.flowers.filter(
-          (flower: Flower) => flower.ocassion === occasion
+          (flower: Flower) => flower.occasion === occasion
         );
         setFlowers(filteredFlowers);
       } catch (error) {

@@ -5,7 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -15,7 +15,7 @@ const InitialForm = {
   image: [] as string[],
   videoName: '',
   video: [] as string[],
-  ocassion: '',
+  occasion: '',
 };
 
 export default function ImageUpload() {
@@ -165,15 +165,15 @@ export default function ImageUpload() {
         onChange={handleChange}
         className={inputStyles}
       />
-      <label className={labelStyles}>Ocassion Type</label>
+      <label className={labelStyles}>Occasion Type</label>
       <select
-        name='ocassion'
+        name='occasion'
         onChange={handleChange}
         className={inputStyles}
         required
       >
         <option value='' hidden>
-          Select ocassion
+          Select occasion
         </option>
         <option value='birthday'>Birthday</option>
         <option value='anniversary'>Anniversary</option>

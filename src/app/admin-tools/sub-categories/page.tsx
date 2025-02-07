@@ -59,7 +59,7 @@ export default function SubCategories() {
     }
   }, [selectedOccasion, occasions]);
 
-  const handleOcassionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOccasionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOccasion(e.target.value);
   };
 
@@ -276,12 +276,10 @@ export default function SubCategories() {
         icon: 'error',
         title: 'Error adding subcategory',
       });
-    }
-    finally {
+    } finally {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-
     }
   };
 
@@ -302,7 +300,7 @@ export default function SubCategories() {
             <label className={labelStyles}>Occasion Name</label>
             <select
               value={selectedOccasion}
-              onChange={handleOcassionChange}
+              onChange={handleOccasionChange}
               className='w-full p-2 border rounded-md'
               required
             >

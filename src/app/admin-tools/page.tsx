@@ -10,9 +10,7 @@ import TopHeader from './components/TopHeader';
 export default function AdminTools() {
   return (
     <section className='relative h-screen p-6 bg-pink'>
-      <TopHeader
-        title='Admin Tools'
-      />
+      <TopHeader title='Admin Tools' />
       <div className='flex flex-col my-5 border w-96 xl:w-1/3 mx-auto bg-white py-10 rounded-xl shadow-xl animate-slideUp mt-20'>
         <p className='text-base lg:text-2xl xl:text-3xl text-center mt-5 mb-2 mx-5 xl:mx-20 font-semibold'>
           Manage your website
@@ -52,7 +50,7 @@ export default function AdminTools() {
             className='flex gap-3 mb-2 hover:text-blue-sky transition duration-300'
           >
             <RiEdit2Line className='text-2xl ml-2' />
-            <p>Visibility settings for special ocassions</p>
+            <p>Visibility settings for special occasions</p>
           </Link>
           <Link
             href='/admin-tools/sub-categories'
