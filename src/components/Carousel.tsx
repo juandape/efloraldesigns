@@ -85,7 +85,7 @@ const Carousel: React.FC<CarouselProps> = ({
   visibleClass,
   hiddenClass,
   limit,
-  link
+  link,
 }) => {
   const sliderVisible = useScrollAnimation(elementId);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -94,9 +94,9 @@ const Carousel: React.FC<CarouselProps> = ({
 
   const settings = {
     dots: false,
-    infinite: true,
-    centerMode: true,
-    focusOnSelect: true,
+    infinite: items.length > 1, // Desactiva el loop infinito si solo hay una imagen
+    centerMode: items.length > 1, // Solo centra si hay más de una imagen
+    focusOnSelect: items.length > 1,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
