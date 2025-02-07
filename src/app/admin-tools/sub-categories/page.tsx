@@ -268,15 +268,20 @@ export default function SubCategories() {
         icon: 'success',
         title: 'Subcategory added successfully',
         showConfirmButton: false,
-        timer: 3500,
+        timer: 1500,
       });
-      window.location.reload();
     } catch (error) {
       console.error('Error adding subcategory:', error);
       Swal.fire({
         icon: 'error',
         title: 'Error adding subcategory',
       });
+    }
+    finally {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+
     }
   };
 
@@ -321,7 +326,7 @@ export default function SubCategories() {
           >
             Add New Subcategory
           </button>
-            <hr />
+          <hr />
           {selectedOccasion && (
             <>
               <h3 className='text-lg font-semibold mt-4'>

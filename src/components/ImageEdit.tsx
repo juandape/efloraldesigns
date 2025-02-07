@@ -5,14 +5,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { GetRole, token } from '@/components/GetRole';
 import { buttonStyles, inputStyles, labelStyles } from '@/styles/Styles';
-import {
-  weddingSubcategories,
-  anniversarySubcategories,
-  birthdaySubcategories,
-  christmasSubcategories,
-  valentinesSubcategories,
-  mothersSubcategories,
-} from '@/components/subcategories';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/flowers`;
@@ -25,6 +17,7 @@ interface MediaItem {
   video?: string;
   videoName?: string;
   ocassion?: string;
+  occasion?: string;
   subcategory?: string;
   position?: number;
   description?: string;
@@ -40,17 +33,55 @@ export default function MediaManager() {
   const [updatedDescription, setUpdatedDescription] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [updatedSubcategory, setUpdatedSubcategory] = useState<string>('');
+  const [occasions, setOccasions] = useState<any[]>([]);
+  const [selectedOccasion, setSelectedOccasion] = useState<string>('');
+  const [subCategories, setSubCategories] = useState<
+    { name: string; description: string; _id?: string }[]
+  >([]);
 
   const role = GetRole();
 
-  const occasionSubcategories: { [key: string]: string[] } = {
-    anniversary: Object.keys(anniversarySubcategories),
-    birthday: Object.keys(birthdaySubcategories),
-    weddings: Object.keys(weddingSubcategories),
-    valentines: Object.keys(valentinesSubcategories),
-    christmas: Object.keys(christmasSubcategories),
-    mothers: Object.keys(mothersSubcategories),
-  };
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/sub-categories`, {
+          headers: { Authorization: `Bearer ${token}`, 'X-User-Role': role },
+        });
+
+        if (Array.isArray(response.data?.subCategories)) {
+          setOccasions(response.data.subCategories); // Guardar las ocasiones con sus subcategorías
+        } else {
+          setOccasions([]);
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching subcategories',
+        });
+        setOccasions([]);
+      }
+    };
+
+    fetchSubcategories();
+  }, []);
+
+  useEffect(() => {
+    // Verificar que selectedOccasion no esté vacío
+    if (selectedOccasion) {
+      const occasion = occasions.find(
+        (occasion) => occasion.occasion === selectedOccasion
+      );
+
+      // Verificar que se encontró la ocasión y luego establecer subcategorías
+      if (occasion) {
+        setSubCategories(occasion.subCategories);
+      } else {
+        setSubCategories([]); // Si no se encuentra la ocasión, limpiar las subcategorías
+      }
+    } else {
+      setSubCategories([]); // Si no hay ocasión seleccionada, limpiar las subcategorías
+    }
+  }, [selectedOccasion, occasions]);
 
   useEffect(() => {
     const fetchMediaItems = async () => {
@@ -61,7 +92,15 @@ export default function MediaManager() {
             'X-User-Role': role,
           },
         });
-        setMediaItems(response.data.flowers);
+
+        const normalizedItems = response.data.flowers.map(
+          (item: MediaItem) => ({
+            ...item,
+            occasion: item.occasion || item.ocassion, // Normalización aquí
+          })
+        );
+
+        setMediaItems(normalizedItems);
       } catch (error) {
         Swal.fire({
           title: 'Error fetching media',
@@ -75,11 +114,13 @@ export default function MediaManager() {
 
   const handleEdit = (media: MediaItem) => {
     setEditingMediaId(media._id);
-    setUpdatedImageName(media.imageName || ''); // Load current image name
-    setUpdatedVideoName(media.videoName || ''); // Load current video name
-    setUpdatedOcassion(media.ocassion || ''); // Load current ocassion
-    setUpdatedPosition(media.position || 1); // Load current position
-    setUpdatedDescription(media.description || ''); // Load current description
+    setUpdatedImageName(media.imageName || '');
+    setUpdatedVideoName(media.videoName || '');
+    setSelectedOccasion(media.ocassion || '');
+    setUpdatedOcassion(media.ocassion || '');
+    setUpdatedPosition(media.position || 1);
+    setUpdatedDescription(media.description || '');
+    setUpdatedSubcategory(media.subcategory || '');
   };
 
   const handleDelete = async (mediaId: string) => {
@@ -132,7 +173,7 @@ export default function MediaManager() {
     const FormData = {
       imageName: updatedImageName,
       videoName: updatedVideoName,
-      ocassion: updatedOcassion,
+      ocassion: updatedOcassion || selectedOccasion,
       subcategory: updatedSubcategory,
       position: updatedPosition,
       description: updatedDescription,
@@ -157,7 +198,7 @@ export default function MediaManager() {
                 subcategory: updatedSubcategory,
                 position: updatedPosition,
                 description: updatedDescription,
-              } // Update only the name fields
+              }
             : item
         )
       );
@@ -168,6 +209,7 @@ export default function MediaManager() {
       setUpdatedOcassion('');
       setUpdatedPosition(1);
       setUpdatedDescription('');
+      setUpdatedSubcategory('');
 
       Swal.fire({
         title: 'Media updated successfully',
@@ -181,47 +223,37 @@ export default function MediaManager() {
     }
   };
 
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value } = e.target; // Destructure name and value from the target
-    const capitalizedValue = capitalizeFirstLetter(value);
-
-    if (name === 'imageName') {
-      setUpdatedImageName(capitalizedValue);
+    const { name, value } = e.target;
+    if (name === 'ocassion') {
+      setSelectedOccasion(value);
+      setUpdatedSubcategory(''); // Reset subcategory when occasion changes
+    } else if (name === 'subcategory') {
+      setUpdatedSubcategory(value);
+    } else if (name === 'imageName') {
+      setUpdatedImageName(value);
     } else if (name === 'videoName') {
-      setUpdatedVideoName(capitalizedValue);
-    } else if (name === 'ocassion') {
-      setUpdatedOcassion(value);
+      setUpdatedVideoName(value);
     } else if (name === 'position') {
-      setUpdatedPosition(parseInt(value));
+      setUpdatedPosition(Number(value));
     } else if (name === 'description') {
-      setUpdatedDescription(capitalizedValue);
+      setUpdatedDescription(value);
     }
   };
 
-  const handleOccasionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOccasion = e.target.value;
-    setUpdatedOcassion(selectedOccasion);
-    setUpdatedSubcategory(''); // Reset the subcategory when changing occasion
-  };
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value); // Update search term state
+    setSearchTerm(e.target.value);
   };
 
-  // Filter media items based on search term
   const filteredMediaItems = mediaItems.filter(
     (media) =>
       media.imageName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       media.videoName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      media.ocassion?.toLowerCase().includes(searchTerm.toLowerCase())
+      (media.occasion || media.ocassion)?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -260,7 +292,7 @@ export default function MediaManager() {
                 {media.imageName || media.videoName}
               </h3>
               <h3 className='mb-2'>
-                <span className='font-bold'>Ocassion:</span> {media.ocassion}
+                <span className='font-bold'>Occasion:</span> {media.ocassion}
               </h3>
               <h3 className='mb-5'>
                 <span className='font-bold'>Subcategory:</span>{' '}
@@ -290,90 +322,70 @@ export default function MediaManager() {
             {editingMediaId === media._id && (
               <div className='edit-media mt-4'>
                 <div className='flex flex-col mx-5 sm:mx-10'>
-                  <label className={labelStyles}>Edit Name</label>
-                  <input
-                    type='text'
-                    name={media.type === 'image' ? 'imageName' : 'videoName'}
-                    value={updatedImageName || updatedVideoName}
-                    onChange={handleChange}
-                    className={inputStyles}
-                  />
-                </div>
-                <div className='flex flex-col mx-5 sm:mx-10'>
-                  <label className={labelStyles}>Edit Ocassion</label>
+                  <label className={labelStyles}>Occasion</label>
                   <select
                     name='ocassion'
-                    value={updatedOcassion}
+                    value={selectedOccasion}
                     onChange={handleChange}
                     className={inputStyles}
                   >
-                    <option value='' hidden>
-                      Select new ocassion
-                    </option>
-                    <option value='anniversary'>Anniversary</option>
-                    <option value='birthday'>Birthday</option>
-                    <option value='weddings'>Wedding</option>
-                    <option value='valentines'>Valentine's Day</option>
-                    <option value='christmas'>Christmas</option>
-                    <option value='mothers'>Mother's Day</option>
+                    <option value=''>Select occasion</option>
+                    {occasions.map((occasion) => (
+                      <option key={occasion._id} value={occasion.occasion}>
+                        {occasion.occasion}
+                      </option>
+                    ))}
                   </select>
                 </div>
+
                 <div className='flex flex-col mx-5 sm:mx-10'>
-                  <label className={labelStyles}>Edit Subcategory</label>
+                  <label className={labelStyles}>Subcategory</label>
                   <select
                     name='subcategory'
                     value={updatedSubcategory}
-                    onChange={(e) => setUpdatedSubcategory(e.target.value)}
+                    onChange={handleChange}
                     className={inputStyles}
-                    disabled={!updatedOcassion} // Disable if no occasion is selected
+                    disabled={!selectedOccasion}
                   >
-                    <option value='' hidden>
-                      Select subcategory
-                    </option>
-                    {updatedOcassion &&
-                      occasionSubcategories[updatedOcassion].map(
-                        (subcategory) => (
-                          <option key={subcategory} value={subcategory}>
-                            {subcategory}
-                          </option>
-                        )
-                      )}
+                    <option value=''>Select subcategory</option>
+                    {subCategories.length > 0 ? (
+                      subCategories.map((subcategory) => (
+                        <option key={subcategory._id} value={subcategory.name}>
+                          {subcategory.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value='' disabled>
+                        No subcategories available
+                      </option>
+                    )}
                   </select>
                 </div>
                 <div className='flex flex-col mx-5 sm:mx-10'>
-                  <label className={labelStyles}>Edit Position</label>
+                  <label className={labelStyles}>Position</label>
                   <input
                     type='number'
                     name='position'
                     value={updatedPosition}
                     onChange={handleChange}
                     className={inputStyles}
-                    min={1} // Asegurar que la posición sea al menos 1
                   />
                 </div>
                 <div className='flex flex-col mx-5 sm:mx-10'>
-                  <label className={labelStyles}>Edit Description</label>
+                  <label className={labelStyles}>Description</label>
                   <textarea
                     name='description'
                     value={updatedDescription}
                     onChange={handleChange}
-                    className={`h-40 resize-none ${inputStyles}`}
+                    className={inputStyles}
                   />
                 </div>
-                <div className='flex gap-4 w-60 mx-auto'>
-                  <button onClick={handleUpdate} className={buttonStyles}>
-                    Update
-                  </button>
+                <div className='text-center'>
                   <button
-                    onClick={() => {
-                      setEditingMediaId(null);
-                      setUpdatedImageName(''); // Reset input field on cancel
-                      setUpdatedVideoName('');
-                      setUpdatedOcassion('');
-                    }}
-                    className={buttonStyles}
+                    onClick={handleUpdate}
+                    className={`mt-5 ${buttonStyles}`}
                   >
-                    Cancel
+                    Update
                   </button>
                 </div>
               </div>
