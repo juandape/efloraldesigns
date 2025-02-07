@@ -68,7 +68,9 @@ export default function MediaManager() {
     // Verificar que selectedOccasion no esté vacío
     if (selectedOccasion) {
       const occasion = occasions.find(
-        (occasion) => occasion.occasion === selectedOccasion
+        (occasion) =>
+          occasion.occasion === selectedOccasion ||
+          occasion.title === selectedOccasion
       );
 
       // Verificar que se encontró la ocasión y luego establecer subcategorías
@@ -91,10 +93,7 @@ export default function MediaManager() {
             'X-User-Role': role,
           },
         });
-
-        if (Array.isArray(response.data?.mediaItems)) {
-          setMediaItems(response.data.mediaItems);
-        }
+        setMediaItems(response.data.flowers);
       } catch (error) {
         Swal.fire({
           title: 'Error fetching media',
@@ -247,9 +246,7 @@ export default function MediaManager() {
     (media) =>
       media.imageName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       media.videoName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (media.occasion || media.occasion)
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      media.occasion?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
