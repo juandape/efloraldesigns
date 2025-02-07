@@ -224,6 +224,7 @@ export default function MediaManager() {
     const { name, value } = e.target;
     if (name === 'occasion') {
       setSelectedOccasion(value);
+      setUpdatedOccasion(value);
       setUpdatedSubcategory(''); // Reset subcategory when occasion changes
     } else if (name === 'subcategory') {
       setUpdatedSubcategory(value);
