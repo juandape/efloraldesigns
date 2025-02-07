@@ -92,14 +92,9 @@ export default function MediaManager() {
           },
         });
 
-        const normalizedItems = response.data.flowers.map(
-          (item: MediaItem) => ({
-            ...item,
-            occasion: item.occasion || item.occasion, // Normalización aquí
-          })
-        );
-
-        setMediaItems(normalizedItems);
+        if (Array.isArray(response.data?.mediaItems)) {
+          setMediaItems(response.data.mediaItems);
+        }
       } catch (error) {
         Swal.fire({
           title: 'Error fetching media',
@@ -172,7 +167,7 @@ export default function MediaManager() {
     const FormData = {
       imageName: updatedImageName,
       videoName: updatedVideoName,
-      occasion: updatedOccasion || selectedOccasion,
+      occasion: updatedOccasion,
       subcategory: updatedSubcategory,
       position: updatedPosition,
       description: updatedDescription,
