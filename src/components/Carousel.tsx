@@ -9,6 +9,7 @@ import Link from 'next/link';
 interface Item {
   name: string;
   image: string;
+  type: 'image' | 'video';
 }
 
 interface CarouselProps {
@@ -75,6 +76,10 @@ const useScrollAnimation = (elementId: string, threshold = 0.5) => {
   }, [elementId, threshold]);
 
   return isVisible;
+};
+
+const isVideo = (file: string) => {
+  return /\.(mp4|webm|ogg)$/i.test(file);
 };
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -151,12 +156,21 @@ const Carousel: React.FC<CarouselProps> = ({
       <Slider {...settings}>
         {displayedItems.map((item, index) => (
           <div key={index} className='flex justify-center'>
-            <img
-              src={item.image}
-              alt={item.name}
-              className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl cursor-pointer'
-              onClick={() => setSelectedItem(item)}
-            />
+            {item.type === 'video' || isVideo(item.image) ? (
+              <video
+                src={item.image}
+                controls
+                className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl cursor-pointer'
+                onClick={() => setSelectedItem(item)}
+              />
+            ) : (
+              <img
+                src={item.image}
+                alt={item.name}
+                className='w-80 h-80 object-cover shadow-lg mx-auto rounded-xl cursor-pointer'
+                onClick={() => setSelectedItem(item)}
+              />
+            )}
             <p className='mt-5 text-lg'>{item.name}</p>
           </div>
         ))}
