@@ -31,6 +31,7 @@ const FlowerCarousel: React.FC<FlowerCarouselProps> = ({
       occasion: flower.occasion,
       position: flower.position || 1,
       description: flower.description,
+      type: flower.image ? 'image' as 'image' | 'video' : 'video' as 'image' | 'video',
     }))
     .sort((a, b) => a.position - b.position);
 
