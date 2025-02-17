@@ -50,6 +50,7 @@ const HandleOccasion: React.FC<HandleOccasionProps> = ({
         subcategory: flower.subcategory,
         position: flower.position || 1,
         description: flower.description,
+        type: flower.image ? 'image' as 'image' | 'video' : 'video' as 'image' | 'video',
       }))
       .sort((a, b) => a.position - b.position);
 
